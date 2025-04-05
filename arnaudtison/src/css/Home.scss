@@ -1,0 +1,155 @@
+$background: rgb(17, 17, 17);
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.nav-menu-mobile {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: $background;
+  display: flex;
+  flex-direction: column;
+  transform: translateY(-100%);
+  transition: transform 0.5s ease-in-out;
+
+  .close-menu {
+    height: 8%;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 15px;
+    font-size: 30px;
+    color: white;
+
+    .close-icon {
+      cursor: pointer;
+    }
+  }
+  .center {
+    height: 92%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    ul {
+      list-style: none;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 75px;
+      font-family: 'Kode Mono';
+      font-size: 25px;
+      padding-bottom: 8%;
+
+      li {
+        background: linear-gradient(currentColor 0 0) bottom left/
+          var(--underline-width, 0%) 0.1em no-repeat;
+        color: white;
+        display: inline-block;
+        padding: 0 0.5em 0.5em;
+        text-decoration: none;
+        transition: background-size 0.2s;
+        font-size: 35px;
+        cursor: pointer;
+
+        &:hover {
+          --underline-width: 100%;
+        }
+
+        a {
+          text-decoration: none;
+          color: white;
+        }
+      }
+    }
+  }
+}
+
+.page-wrapper {
+  background-color: $background;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+
+  .nav-wrapper {
+    background-color: $background;
+    width: 100%;
+    height: 8%;
+    display: flex;
+    flex-direction: row;
+    font-family: 'Roboto mono';
+    border-bottom: 3px rgb(34, 34, 34);
+
+    .logo {
+      width: 15%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .info {
+      width: 70%;
+      display: flex;
+      justify-content: center;
+      padding-left: 8px;
+      flex-direction: column;
+      .name {
+        color: white;
+        font-size: 15px;
+      }
+      .title {
+        color: rgb(148, 148, 148);
+        font-size: 13px;
+      }
+    }
+    .menu {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-size: 30px;
+      width: 15%;
+
+      .menu-icon {
+        cursor: pointer;
+      }
+    }
+  }
+
+  .section-wrapper {
+    overflow-y: scroll;
+    width: 100%;
+    height: 100%;
+
+    .section {
+      color: white;
+      width: 100%;
+      height: calc(100vh - 8% - 8%);
+      background-color: $background;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'droid-sans-mono', monospace;
+    }
+
+    .home {
+      background-color: lighten($background, 2%);
+    }
+    .about {
+      background-color: lighten($background, 4%);
+    }
+    .projects {
+      background-color: lighten($background, 6%);
+    }
+    .connect {
+      background-color: lighten($background, 8%);
+    }
+  }
+}
