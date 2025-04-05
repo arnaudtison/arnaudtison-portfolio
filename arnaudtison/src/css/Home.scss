@@ -6,6 +6,10 @@ $background: rgb(17, 17, 17);
   box-sizing: border-box;
 }
 
+html {
+  overflow: hidden;
+}
+
 .nav-menu-mobile {
   position: absolute;
   width: 100%;
@@ -60,82 +64,84 @@ $background: rgb(17, 17, 17);
   background-color: $background;
   display: flex;
   flex-direction: column;
-  width: 100%;
   height: 100vh;
   overflow: hidden;
 
   .nav-wrapper {
     background-color: $background;
     width: 100%;
-    height: 8%;
+    height: 65px;
     display: flex;
     flex-direction: row;
     font-family: 'Roboto mono';
     border-bottom: 3px rgb(34, 34, 34);
-    position: fixed;
-
-    .logo {
-      width: 15%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    .info {
-      width: 70%;
-      display: flex;
-      justify-content: center;
-      padding-left: 8px;
-      flex-direction: column;
-      .name {
-        color: white;
-        font-size: 15px;
-      }
-      .title {
-        color: rgb(148, 148, 148);
-        font-size: 13px;
-      }
-    }
-    .menu {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: white;
-      font-size: 30px;
-      width: 15%;
-
-      .menu-icon {
-        cursor: pointer;
-      }
-    }
+    z-index: 1;
+    position: relative; // or `sticky` if you want it always visible while scrolling
+    top: 0;
+    flex-shrink: 0;
   }
 
-  .section-wrapper {
-    overflow-y: scroll;
-    width: 100%;
-    height: 100%;
-
-    .section {
+  .logo {
+    width: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .info {
+    width: 70%;
+    display: flex;
+    justify-content: center;
+    padding-left: 8px;
+    flex-direction: column;
+    .name {
       color: white;
-      width: 100%;
-      height: calc(100vh - 8%);
-      background-color: $background;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-family: 'droid-sans-mono', monospace;
+      font-size: 15px;
     }
+    .title {
+      color: rgb(148, 148, 148);
+      font-size: 13px;
+    }
+  }
+  .menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 30px;
+    width: 15%;
 
-    .home {
-      background-color: lighten($background, 2%);
+    .menu-icon {
+      cursor: pointer;
     }
-    .about {
-      background-color: lighten($background, 4%);
-    }
-    .projects {
-      background-color: lighten($background, 6%);
-    }
-    .connect {
-      background-color: lighten($background, 8%);
-    }
+  }
+}
+
+.section-wrapper {
+  flex: 1;
+  overflow-y: auto;
+  width: 100%;
+
+  .section {
+    color: white;
+    width: 100%;
+    height: 100vh;
+    background-color: $background;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'droid-sans-mono', monospace;
+  }
+  .home {
+    background-color: lighten($background, 2%);
+    height: calc(100vh - 65px);
+  }
+  .about {
+    background-color: lighten($background, 4%);
+  }
+  .projects {
+    background-color: lighten($background, 6%);
+  }
+  .connect {
+    background-color: lighten($background, 8%);
   }
 }

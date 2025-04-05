@@ -10,22 +10,34 @@ function Home() {
 
   const toggleMenu = () => {
     const menu = document.querySelector('.nav-menu-mobile');
-    const menuTransform = window.getComputedStyle(menu).transform;
 
-    if (menuTransform === 'matrix(1, 0, 0, 1, 0, 0)') {
-      // translateY(0)
+    if (menu.style.transform === 'translateY(0px)') {
       menu.style.transform = 'translateY(-100%)';
     } else {
-      menu.style.transform = 'translateY(0)';
+      menu.style.transform = 'translateY(0px)';
     }
   };
-  const scrollToSection = (id) => {
+  const scrollToSection = (id, priority) => {
     const section = document.getElementById(id);
+    const menu = document.querySelector('.nav-menu-mobile');
 
-    toggleMenu();
-    setTimeout(() => {
-      section.scrollIntoView({ behavior: 'smooth' });
-    }, 400);
+    if (priority) {
+      console.log(menu.style.transform === 'translateY(0px)');
+
+      if (menu.style.transform === 'translateY(0px)') {
+        menu.style.transform = 'translateY(-100%)';
+        setTimeout(() => {
+          section.scrollIntoView({ behavior: 'smooth' });
+        }, 400);
+      } else {
+        section.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      toggleMenu();
+      setTimeout(() => {
+        section.scrollIntoView({ behavior: 'smooth' });
+      }, 400);
+    }
   };
 
   return (
@@ -52,7 +64,12 @@ function Home() {
       <div className='page-wrapper'>
         <div className='nav-wrapper'>
           <div className='logo'>
-            <img width={35} src={logo} />
+            <img
+              onClick={() => scrollToSection('home', true)}
+              width={35}
+              src={logo}
+              className='logo-img'
+            />
           </div>
           <div className='info'>
             <div className='name'>TISON A.</div>
