@@ -7,7 +7,7 @@
   "repository": "git@github.com:arnaudtison/portfolio.git",
   "license": "MIT",
   "private": true,
-  "packageManager": "yarn@4.5.0",
+  "packageManager": "yarn@4.7.0",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -32,7 +32,7 @@
     "vite": "^5.4.1"
   },
   "engines": {
-    "node": "20.6.0",
-    "yarn": "4.4.0"
+    "node": "22.9.0",
+    "yarn": "4.7.0"
   }
 }
