@@ -16,20 +16,6 @@ $background: rgb(17, 17, 17);
   transform: translateY(-100%);
   transition: transform 0.5s ease-in-out;
 
-  .close-menu {
-    height: 8%;
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    padding-right: 15px;
-    font-size: 30px;
-    color: white;
-
-    .close-icon {
-      cursor: pointer;
-    }
-  }
   .center {
     height: 92%;
     display: flex;
@@ -45,7 +31,6 @@ $background: rgb(17, 17, 17);
       gap: 75px;
       font-family: 'Kode Mono';
       font-size: 25px;
-      padding-bottom: 8%;
 
       li {
         background: linear-gradient(currentColor 0 0) bottom left/

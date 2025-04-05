@@ -8,19 +8,21 @@ function Home() {
   const connect = '{ connect }';
   const home = '{ home }';
 
-  const openMenu = () => {
+  const toggleMenu = () => {
     const menu = document.querySelector('.nav-menu-mobile');
-    menu.style.transform = 'translateY(0)';
-  };
+    const menuTransform = window.getComputedStyle(menu).transform;
 
-  const closeMenu = () => {
-    const menu = document.querySelector('.nav-menu-mobile');
-    menu.style.transform = 'translateY(-100%)';
+    if (menuTransform === 'matrix(1, 0, 0, 1, 0, 0)') {
+      // translateY(0)
+      menu.style.transform = 'translateY(-100%)';
+    } else {
+      menu.style.transform = 'translateY(0)';
+    }
   };
   const scrollToSection = (id) => {
     const section = document.getElementById(id);
 
-    closeMenu();
+    toggleMenu();
     setTimeout(() => {
       section.scrollIntoView({ behavior: 'smooth' });
     }, 400);
@@ -29,9 +31,6 @@ function Home() {
   return (
     <>
       <div className='nav-menu-mobile'>
-        <div className='close-menu'>
-          <IonIcon onClick={closeMenu} name='close' className='close-icon' />
-        </div>
         <div className='center'>
           <ul>
             <li>
@@ -61,7 +60,7 @@ function Home() {
           </div>
           <div className='menu'>
             <IonIcon
-              onClick={openMenu}
+              onClick={toggleMenu}
               name='menu-sharp'
               className='menu-icon'
             />
