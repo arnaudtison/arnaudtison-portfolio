@@ -10,13 +10,17 @@ function Home() {
 
   const toggleMenu = () => {
     const menu = document.querySelector('.nav-menu-mobile');
+    const body = document.body;
 
     if (menu.style.transform === 'translateY(0px)') {
       menu.style.transform = 'translateY(-100%)';
+      body.style.overflowY = 'scroll'; // Enable scrolling
     } else {
       menu.style.transform = 'translateY(0px)';
+      body.style.overflowY = 'hidden'; // Disable scrolling
     }
   };
+
   const scrollToSection = (id, priority) => {
     const section = document.getElementById(id);
     const menu = document.querySelector('.nav-menu-mobile');

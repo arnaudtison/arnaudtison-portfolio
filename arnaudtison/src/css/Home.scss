@@ -6,12 +6,18 @@ $background: rgb(17, 17, 17);
   box-sizing: border-box;
 }
 
-html {
-  overflow: hidden;
+html,
+body {
+  height: 100%;
+}
+
+body {
+  padding-top: 65px; // match navbar height
+  overflow-y: scroll;
 }
 
 .nav-menu-mobile {
-  position: absolute;
+  position: fixed;
   width: 100%;
   height: 100%;
   background-color: $background;
@@ -64,10 +70,12 @@ html {
   background-color: $background;
   display: flex;
   flex-direction: column;
-  height: 100vh;
-  overflow: hidden;
+  min-height: 100vh;
 
   .nav-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
     background-color: $background;
     width: 100%;
     height: 65px;
@@ -76,9 +84,6 @@ html {
     font-family: 'Roboto mono';
     border-bottom: 3px rgb(34, 34, 34);
     z-index: 1;
-    position: relative; // or `sticky` if you want it always visible while scrolling
-    top: 0;
-    flex-shrink: 0;
   }
 
   .logo {
@@ -117,13 +122,11 @@ html {
 }
 
 .section-wrapper {
-  flex: 1;
-  overflow-y: auto;
   width: 100%;
 
   .section {
+    scroll-margin-top: 65px;
     color: white;
-    width: 100%;
     height: 100vh;
     background-color: $background;
     display: flex;
@@ -133,7 +136,6 @@ html {
   }
   .home {
     background-color: lighten($background, 2%);
-    height: calc(100vh - 65px);
   }
   .about {
     background-color: lighten($background, 4%);
