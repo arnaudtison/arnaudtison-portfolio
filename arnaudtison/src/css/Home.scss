@@ -136,6 +136,7 @@ body {
   }
   .home {
     background-color: lighten($background, 2%);
+    height: calc(100vh - 65px);
   }
   .about {
     background-color: lighten($background, 4%);
