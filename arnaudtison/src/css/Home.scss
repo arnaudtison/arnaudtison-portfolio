@@ -141,11 +141,12 @@ body {
     padding: 25px 30px;
   }
   .home {
-    height: 55vh;
+    height: 52vh;
   }
 
   .about {
-    background-color: lighten($background, 5%);
+    background-color: lighten($background, 2%);
+    height: 52vh;
   }
   .projects {
   }

@@ -63,10 +63,10 @@ $accent: rgb(159, 198, 241);
   }
 
   .small-about-me {
-    padding-top: 10px;
     display: flex;
     flex-direction: column;
     gap: 10px;
+
     p {
       text-align: left;
     }
