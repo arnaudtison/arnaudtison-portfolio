@@ -1,0 +1,100 @@
+$background: rgb(17, 17, 17);
+$accent: rgb(159, 198, 241);
+
+* {
+  font-family: 'Inter';
+}
+
+.accent-color {
+  color: $accent;
+  font-weight: 700;
+}
+
+.cta {
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+}
+
+.home-section-wrapper {
+  // background-color: blue;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+
+  .intro-wrapper {
+    display: flex;
+    font-size: 25px;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    align-content: flex-start;
+    flex-direction: column;
+    gap: 5px;
+
+    #introduction #name {
+      text-decoration: underline;
+      text-decoration-color: $accent;
+      text-underline-offset: 8px;
+      text-decoration-thickness: 3px;
+      font-weight: 800;
+      // background: linear-gradient(
+      //   to right,
+      //   rgb(255, 255, 255),
+      //   /* White */ rgb(221, 233, 250) 40%,
+      //   /* Light blue */ rgb(179, 204, 250) 50%,
+      //   /* Soft blue */ rgb(150, 179, 250) 70%,
+      //   /* Slightly deeper blue */ rgb(159, 198, 241) 100% /* Accent blue */
+      // );
+      // background-clip: text;
+      // -webkit-background-clip: text;
+      // -webkit-text-fill-color: transparent;
+    }
+  }
+
+  .subintro-wrapper {
+    font-weight: 500;
+    font-size: 16px;
+  }
+
+  .small-about-me {
+    padding-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    p {
+      text-align: left;
+    }
+  }
+
+  .cta-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .button {
+      font-size: 16px;
+      padding: 10px 25px;
+      border-radius: 10px;
+      border: none;
+      background-color: $background;
+      border: 2px solid $accent;
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s ease-in-out;
+
+      &:hover {
+        background-color: $accent;
+        color: $background;
+        border: 2px solid $accent;
+        font-weight: 600;
+      }
+    }
+  }
+}

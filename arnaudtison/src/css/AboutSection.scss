@@ -1,0 +1,29 @@
+$background: rgb(17, 17, 17);
+$accent: rgb(159, 198, 241);
+
+* {
+  font-family: 'Inter';
+}
+
+.accent-color {
+  color: $accent;
+  font-weight: 700;
+}
+
+.cta {
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+}
+
+.about-section-wrapper {
+  // background-color: blue;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
