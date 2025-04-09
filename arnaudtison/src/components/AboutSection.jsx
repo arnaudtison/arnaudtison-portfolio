@@ -48,7 +48,7 @@ function AboutSection() {
             <span className='accent-color'>English</span>, and I can find my way
             around in <span className='accent-color'>French</span> too. I&apos;d
             say I&apos;m <span className='accent-color'>social</span>,{' '}
-            <span className='accent-color'>team-oriented</span> and I enjoy
+            <span className='accent-color'>team-oriented</span> and I enjoy{' '}
             <span className='accent-color'>working with others</span> and{' '}
             <span className='accent-color'>learning together</span>.
           </p>
