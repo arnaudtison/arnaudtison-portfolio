@@ -1,8 +1,8 @@
 import '../css/Home.scss';
 import IonIcon from '@reacticons/ionicons';
 import logo from '../assets/logo.png';
-import HomeSection from '../components/HomeSection';
-import AboutSection from '../components/AboutSection';
+import HomeSection from '../components/HomeSection.jsx';
+import AboutSection from '../components/AboutSection.jsx';
 
 function Home() {
   const projects = '{ projects}';
