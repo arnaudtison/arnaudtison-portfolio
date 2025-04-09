@@ -1,11 +1,11 @@
 import '../css/Home.scss';
 import IonIcon from '@reacticons/ionicons';
 import logo from '../assets/logo.png';
-import HomeSection from '../components/HomeSection.jsx';
-import AboutSection from '../components/AboutSection.jsx';
+import HomeSection from '../components/HomeSection';
+import AboutSection from '../components/AboutSection';
 
 function Home() {
-  const projects = '{ projects }';
+  const projects = '{ projects}';
   const about = '{ about }';
   const connect = '{ connect }';
   const home = '{ home }';
@@ -16,10 +16,10 @@ function Home() {
 
     if (menu.style.transform === 'translateY(0px)') {
       menu.style.transform = 'translateY(-100%)';
-      body.style.overflowY = 'scroll';
+      body.style.overflowY = 'scroll'; // Enable scrolling
     } else {
       menu.style.transform = 'translateY(0px)';
-      body.style.overflowY = 'hidden';
+      body.style.overflowY = 'hidden'; // Disable scrolling
     }
   };
 
@@ -28,6 +28,8 @@ function Home() {
     const menu = document.querySelector('.nav-menu-mobile');
 
     if (priority) {
+      console.log(menu.style.transform === 'translateY(0px)');
+
       if (menu.style.transform === 'translateY(0px)') {
         menu.style.transform = 'translateY(-100%)';
         setTimeout(() => {
@@ -77,7 +79,7 @@ function Home() {
           </div>
           <div className='info'>
             <div className='name'>TISON A.</div>
-            <div className='title'>STUDENT APPLIED IT</div>
+            <div className='title'>APPLIED IT STUDENT</div>
           </div>
           <div className='menu'>
             <IonIcon
@@ -94,8 +96,12 @@ function Home() {
           <div className='section about' id='about'>
             <AboutSection />
           </div>
-          <div className='section projects' id='projects'></div>
-          <div className='section connect' id='connect'></div>
+          <div className='section projects' id='projects'>
+            <h1>Projects.</h1>
+          </div>
+          <div className='section connect' id='connect'>
+            <h1>Connect.</h1>
+          </div>
         </div>
       </div>
     </>

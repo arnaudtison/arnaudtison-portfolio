@@ -7,23 +7,49 @@ $accent: rgb(159, 198, 241);
 
 .accent-color {
   color: $accent;
-  font-weight: 700;
-}
-
-.cta {
-  cursor: pointer;
-
-  &:hover {
-    text-decoration: underline;
-    text-underline-offset: 3px;
-  }
+  font-weight: 600;
 }
 
 .about-section-wrapper {
-  // background-color: blue;
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
   gap: 40px;
+
+  .about-top-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    span {
+      font-family: 'Roboto mono';
+      font-weight: 600;
+      font-size: 20px;
+    }
+  }
+
+  .about-section {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+
+    .about-section-intro {
+      font-family: 'Inter';
+      font-weight: 600;
+      font-size: 22px;
+    }
+
+    .about-section-text {
+      display: flex;
+      gap: 20px;
+      flex-direction: column;
+
+      p {
+        line-height: 1.4;
+      }
+    }
+  }
 }
