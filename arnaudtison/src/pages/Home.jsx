@@ -3,9 +3,11 @@ import IonIcon from '@reacticons/ionicons';
 import logo from '../assets/logo.png';
 import HomeSection from '../components/HomeSection.jsx';
 import AboutSection from '../components/AboutSection.jsx';
+import ProjectsSection from '../components/ProjectsSection.jsx';
+import ConnectSection from '../components/ConnectSection.jsx';
 
 function Home() {
-  const projects = '{ projects}';
+  const projects = '{ projects }';
   const about = '{ about }';
   const connect = '{ connect }';
   const home = '{ home }';
@@ -97,10 +99,10 @@ function Home() {
             <AboutSection />
           </div>
           <div className='section projects' id='projects'>
-            <h1>Projects.</h1>
+            <ProjectsSection />
           </div>
           <div className='section connect' id='connect'>
-            <h1>Connect.</h1>
+            <ConnectSection />
           </div>
         </div>
       </div>
