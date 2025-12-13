@@ -7,7 +7,7 @@
   "repository": "git@github.com:arnaudtison/portfolio.git",
   "license": "MIT",
   "private": true,
-  "packageManager": "yarn@4.7.0",
+  "packageManager": "yarn@1.22.22",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -17,6 +17,7 @@
   "dependencies": {
     "@reacticons/ionicons": "^7.1.0",
     "ionicons": "^7.4.0",
+    "lucide-react": "^0.561.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-ionicons": "^4.2.1",
