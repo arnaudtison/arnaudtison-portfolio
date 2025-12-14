@@ -1,0 +1,109 @@
+.whoami-scroll-section {
+  height: 200vh;
+  position: relative;
+}
+
+.whoami-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+
+.whoami-track {
+  height: 100%;
+  width: 200vw;
+  display: grid;
+  grid-template-columns: 100vw 100vw;
+  grid-template-rows: 100vh 100vh;
+  will-change: transform;
+  transform: translateX(0);
+}
+
+.whoami-panel {
+  width: 100vw;
+  height: 100vh;
+}
+
+.whoami-content-container {
+  width: 100%;
+  height: 100%;
+}
+
+.whoami-content-container h2 {
+  font-family: "Jetbrains Mono", monospace;
+  font-size: 44px;
+  font-weight: 400;
+  padding: 40px 0 60px 0;
+}
+
+.content-text-container {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: 1fr 1fr;
+}
+
+.whoami-panel p {
+  font-family: "IBM Plex Serif", serif;
+  font-size: 24px;
+  line-height: 1.7;
+}
+
+.whoami-left {
+  grid-column: 1;
+  grid-row: 1;
+  padding: 140px 100px;
+}
+
+.whoami-right {
+  display: flex;
+  flex-direction: column;
+  grid-column: 2;
+  grid-row: 2;
+  padding: 140px 100px 100px 100px;
+}
+
+.whoami-technologies-container{
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+.whoami-right .whoami-technologies-container h2 {
+  font-family: "Jetbrains Mono", monospace;
+  font-size: 44px;
+  font-weight: 400;
+  padding: 40px 0 60px 0;
+}
+
+.tech3d-wrapper {
+  flex: 1;
+  width: 100%;
+  min-height: 600px; /* or 700px if you want bigger */
+  border-radius: 24px;
+  overflow: hidden;
+}
+
+.whoami-technologies-container .technologies-content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  gap: 45px;
+}
+
+.technologies-content .technology-info {
+  width: 35%;
+  height: 100%;
+  backdrop-filter: blur(10px);
+  border: 3px solid #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-family: "IBM Plex Serif", serif;
+  font-weight: 400;
+  font-family: "IBM Plex Serif", serif;
+  font-size: 24px;
+  line-height: 1.7;
+}

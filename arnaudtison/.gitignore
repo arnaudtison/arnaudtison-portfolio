@@ -39,7 +39,11 @@ bower_components
 build/Release
 
 # Dependency directories
-node_modules/
+# EDITED: Changed to **/ to ensure it catches nested folders
+**/node_modules
+/node_modules/
+*node_modules/
+*/node_modules/*
 jspm_packages/
 
 # Snowpack dependency directory (https://snowpack.dev/)

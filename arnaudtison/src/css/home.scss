@@ -7,13 +7,15 @@
 .navigation-wrapper {
   font-family: "Jetbrains Mono";
   position: fixed;
-  background: none;
+  backdrop-filter: blur(6px);
+  background-color: rgba(187, 187, 187, 0.25);
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   width: 100%;
   padding: 35px 100px 25px 100px;
+  z-index: 1000000;
 }
 
 .navigation-wrapper .logo-container img {
@@ -43,9 +45,7 @@
   flex-direction: column;
 }
 
-/* =========================
-   TOP NAME MARQUEE
-   ========================= */
+/* HORIZONTAL NAME SLIDER */
 
 .horizontal-slider {
   overflow: hidden;
@@ -89,9 +89,7 @@
   }
 }
 
-/* =========================
-   CONTENT GRID
-   ========================= */
+/* SYNTAX BLOCK + IMAGE */
 
 .landing-wrapper .content-grid {
   display: flex;
@@ -175,29 +173,23 @@
   margin-top: -140px;
 }
 
-/* =========================
-   LANGUAGE MARQUEE (REVERSE)
-   ========================= */
-
+/* LANGUAGE SLIDER */
 .horizontal-language-slider {
   margin-top: auto;
   width: 100%;
   overflow: hidden;
   padding: 20px 0;
 }
-
 .horizontal-language-slider .marquee {
   width: 100%;
   overflow: hidden;
 }
-
 .horizontal-language-slider .marquee__track {
   display: flex;
   width: max-content;
   will-change: transform;
   animation: marquee-left 30s linear infinite;
 }
-
 .horizontal-language-slider .marquee__content {
   flex: 0 0 auto;
   display: inline-flex;
@@ -206,22 +198,16 @@
   font-family: "Jetbrains Mono";
   font-size: 20px;
 }
-
-/* 1) separators BETWEEN items */
 .horizontal-language-slider .marquee__content span + span::before {
   content: "//";
   margin: 0 30px;
 }
-
-/* 2) separator at the END of EACH duplicated block
-      (fixes the SQL|HTML seam) */
 .horizontal-language-slider .marquee__content::after {
   content: "//";
   margin: 0 30px;
   opacity: 1;
 }
 
-/* Reverse direction when you add .marquee--reverse */
 .horizontal-language-slider .marquee--reverse .marquee__track {
   animation-name: marquee-right;
 }

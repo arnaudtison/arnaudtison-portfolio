@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
-import logo from "../assets/logo_black.png";
 import imageSelf from "../assets/imageSelf.png";
-import { Instagram, Github } from "lucide-react";
+import About from "./About.jsx";
 import "../css/home.scss";
 
 function Home() {
@@ -31,20 +30,6 @@ function Home() {
 
   return (
     <div className="page-wrapper">
-      <div className="navigation-wrapper">
-        <div className="logo-container">
-          <img src={logo} alt="arnaudtison logo" />
-        </div>
-        <div className="redirect-links-container">
-          <div className="redirect-link">WHO AM I?</div>
-          <div className="redirect-link">WORK</div>
-          <div className="redirect-link">GET IN TOUCH</div>
-          <div className="external-links-container">
-            <Instagram size={35} />
-            <Github size={35} />
-          </div>
-        </div>
-      </div>
       <div className="landing-wrapper">
         <div className="horizontal-slider">
           <div className="marquee">
@@ -102,7 +87,6 @@ function Home() {
                 <span>SQL</span>
               </div>
 
-              {/* duplicate for seamless loop */}
               <div className="marquee__content" aria-hidden="true">
                 <span>HTML</span>
                 <span>CSS</span>
@@ -120,6 +104,10 @@ function Home() {
         </div>
       </div>
       {/* <ScrollIndicator /> */}
+
+      <About />
+      {/* <Work />
+      <Contact /> */}
     </div>
   );
 }
