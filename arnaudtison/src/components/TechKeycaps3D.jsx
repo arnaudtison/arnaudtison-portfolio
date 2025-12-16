@@ -166,8 +166,10 @@ function Keycap({ icon, color, position, bodyGeo, keyHeight, label, desc, setHov
         e.stopPropagation();
         setHovered(true);
         document.body.style.cursor = "pointer";
-        // PASS DATA UP TO PARENT
-        if (setHoveredTech) setHoveredTech({ label, desc, color });
+        if (setHoveredTech) {
+           // We pass color: "#000" so the text is visible (since keys are white)
+           setHoveredTech({ label, desc, color: "#000000" }); 
+        }
       }}
       onPointerLeave={(e) => {
         setHovered(false);
@@ -222,7 +224,7 @@ function Scene({ setHoveredTech }) {
           <Keycap
             key={i}
             icon={k.icon}
-            color="#959494ff"
+            color="#dcdcdc"
             label={k.label} // Pass label
             desc={k.desc}   // Pass desc
             setHoveredTech={setHoveredTech} // Pass function
@@ -244,17 +246,26 @@ export default function TechKeycaps3D({ setHoveredTech }) {
     // FIX: Changed 100vw/vh to 100% so it fits in the parent container
     <div style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center"}}>
       <Canvas
-        transparent
         shadows
         dpr={[1, 2]}
-        camera={{ position: [7, 5, 7], fov: 25 }}
+        camera={{ position: [8, 6, 8], fov: 28 }}
         gl={{ outputColorSpace: THREE.SRGBColorSpace }}
       >
-        <CameraRig target={new THREE.Vector3(0, -0.5, 0)} />
-        <directionalLight position={[10, 12, 5]} intensity={2} color="#fffdfa" />
-        <directionalLight position={[-5, 5, -5]} intensity={0.5} color="#d0e0ff" />
-        <ambientLight intensity={0.5} />
-        <Environment preset="city" environmentIntensity={0.5} />
+        {/* If you want a transparent background, REMOVE this line below: */}
+        <color attach="background" args={['#ffffff']} />
+        
+        <CameraRig target={new THREE.Vector3(0, 0, 0)} />
+        
+        <ambientLight intensity={1.0} />
+        <directionalLight 
+          position={[5, 10, 5]} 
+          intensity={1.5} 
+          castShadow 
+          shadow-mapSize={[1024, 1024]}
+        >
+            <orthographicCamera attach="shadow-camera" args={[-10, 10, 10, -10]} />
+        </directionalLight>
+        <directionalLight position={[-5, 5, -5]} intensity={0.5} color="#eef" />
 
         <Suspense fallback={null}>
           <Scene setHoveredTech={setHoveredTech} />

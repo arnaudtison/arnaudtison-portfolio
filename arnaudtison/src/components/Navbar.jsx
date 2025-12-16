@@ -10,8 +10,8 @@ export default function Navbar() {
       </div>
       <div className="redirect-links-container">
         <div className="redirect-link">WHO AM I?</div>
-        <div className="redirect-link">WORK</div>
         <div className="redirect-link">TECHNOLOGIES</div>
+        <div className="redirect-link">WORK</div>
         <div className="redirect-link">GET IN TOUCH</div>
         <div className="external-links-container">
           <Instagram size={35} />

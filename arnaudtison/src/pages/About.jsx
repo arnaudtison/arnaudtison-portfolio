@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import TechKeycaps3D from "../components/TechKeycaps3D.jsx";
 
 import "../css/about.scss";
@@ -6,43 +6,70 @@ import "../css/about.scss";
 export default function About() {
   const sectionRef = useRef(null);
   const trackRef = useRef(null);
+  
+  // 1. RAW INPUT: The data coming from the 3D keyboard (debounced)
+  const [activeTech, setActiveTech] = useState(null);
 
+  // 2. DISPLAY STATE: What is actually showing on screen right now
+  const [displayedTech, setDisplayedTech] = useState(null);
+  // 3. VISIBILITY STATE: Controls the fade opacity (false = transparent, true = visible)
+  const [isVisible, setIsVisible] = useState(true);
+
+  const hoverTimeoutRef = useRef(null);
+
+  // DEBOUNCE HELPER (from previous step)
+  const handleTechHover = (techData) => {
+    if (hoverTimeoutRef.current) {
+      clearTimeout(hoverTimeoutRef.current);
+    }
+    
+    // If hovering a key, wait 0.5s before committing (prevents flicker on fast mouseover)
+    // If leaving (null), update immediately so it doesn't get stuck
+    const delay = techData ? 100 : 0;
+
+    hoverTimeoutRef.current = setTimeout(() => {
+      setActiveTech(techData);
+    }, delay);
+  };
+
+  // TRANSITION EFFECT: Handles the smooth cross-fade
+  useEffect(() => {
+    // A. Start fading out immediately when data changes
+    setIsVisible(false);
+
+    // B. Wait for the fade-out (300ms), then swap data and fade back in
+    const transitionTimer = setTimeout(() => {
+      setDisplayedTech(activeTech);
+      setIsVisible(true);
+    }, 300); // This matches the CSS transition duration below
+
+    return () => clearTimeout(transitionTimer);
+  }, [activeTech]);
+
+  // [SCROLL LOGIC - Kept exactly as is]
   useEffect(() => {
     const section = sectionRef.current;
     const track = trackRef.current;
     if (!section || !track) return;
-
-    const START_OFFSET = 200; // px before horizontal movement starts
-    const END_OFFSET = 200; // px after movement finishes (optional)
-
+    const START_OFFSET = 200;
+    const END_OFFSET = 200;
     const onScroll = () => {
       const rect = section.getBoundingClientRect();
-
       const totalScrollable = section.offsetHeight - window.innerHeight;
-
-      // How far we've scrolled *inside* the section
       const rawScroll = Math.min(Math.max(-rect.top, 0), totalScrollable);
-
-      // Adjust scroll to include lead-in and lead-out
       const usableScroll = totalScrollable - START_OFFSET - END_OFFSET;
-
       const adjustedScroll = Math.min(
         Math.max(rawScroll - START_OFFSET, 0),
         usableScroll
       );
-
       const progress = usableScroll > 0 ? adjustedScroll / usableScroll : 0;
-
       const maxX = track.scrollWidth - window.innerWidth;
       const x = maxX * progress;
-
       track.style.transform = `translateX(${-x}px)`;
     };
-
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onScroll);
-
     return () => {
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
@@ -93,11 +120,38 @@ export default function About() {
           <div className="whoami-panel whoami-right">
             <div className="whoami-technologies-container">
               <h2>TECHNOLOGIES</h2>
+              
               <div className="technologies-content">
                 <div className="technology-info">
-                  <h3>Hover a keycap to see more info</h3>
+                  
+                  {/* WRAPPER DIV for the Transition */}
+                  <div
+                    style={{
+                      opacity: isVisible ? 1 : 0,
+                      transition: "opacity 300ms ease-in-out", // Smooth fade
+                      minHeight: "150px" // Prevents layout jump during swap
+                    }}
+                  >
+                    {displayedTech ? (
+                      <div className="tech-card-active" style={{ borderLeft: `5px solid ${displayedTech.color}`, paddingLeft: "1.5rem" }}>
+                        <h3 style={{ fontSize: "3rem", margin: "0", lineHeight: "1" }}>
+                          {displayedTech.label}
+                        </h3>
+                        <p style={{ fontSize: "1.2rem", marginTop: "1rem", lineHeight: "1.5", opacity: 0.8 }}>
+                          {displayedTech.desc}
+                        </p>
+                      </div>
+                    ) : (
+                      <h3 style={{ opacity: 0.4, fontSize: "2rem" }}>
+                        Hover a keycap to see more info
+                      </h3>
+                    )}
+                  </div>
+
                 </div>
-                <TechKeycaps3D />
+
+                <TechKeycaps3D setHoveredTech={handleTechHover} />
+                
               </div>
             </div>
           </div>
