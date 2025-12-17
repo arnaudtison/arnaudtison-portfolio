@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import TechKeycaps3D from "../components/TechKeycaps3D.jsx";
-
 import "../css/about.scss";
+import StarBackground from "../components/StarBackground.jsx";
 
 export default function About() {
   const sectionRef = useRef(null);
   const trackRef = useRef(null);
-  
+
   // 1. RAW INPUT: The data coming from the 3D keyboard (debounced)
   const [activeTech, setActiveTech] = useState(null);
 
@@ -22,7 +22,7 @@ export default function About() {
     if (hoverTimeoutRef.current) {
       clearTimeout(hoverTimeoutRef.current);
     }
-    
+
     // If hovering a key, wait 0.5s before committing (prevents flicker on fast mouseover)
     // If leaving (null), update immediately so it doesn't get stuck
     const delay = techData ? 100 : 0;
@@ -119,39 +119,27 @@ export default function About() {
 
           <div className="whoami-panel whoami-right">
             <div className="whoami-technologies-container">
-              <h2>TECHNOLOGIES</h2>
-              
+              <h2>
+                TECHNOLOGIES
+                <p>Hover over a key to learn more</p>
+              </h2>
+
               <div className="technologies-content">
                 <div className="technology-info">
-                  
-                  {/* WRAPPER DIV for the Transition */}
-                  <div
-                    style={{
-                      opacity: isVisible ? 1 : 0,
-                      transition: "opacity 300ms ease-in-out", // Smooth fade
-                      minHeight: "150px" // Prevents layout jump during swap
-                    }}
-                  >
-                    {displayedTech ? (
-                      <div className="tech-card-active" style={{ borderLeft: `5px solid ${displayedTech.color}`, paddingLeft: "1.5rem" }}>
-                        <h3 style={{ fontSize: "3rem", margin: "0", lineHeight: "1" }}>
-                          {displayedTech.label}
-                        </h3>
-                        <p style={{ fontSize: "1.2rem", marginTop: "1rem", lineHeight: "1.5", opacity: 0.8 }}>
-                          {displayedTech.desc}
-                        </p>
+                  <div className={`tech-info-content ${displayedTech ? "active" : ""}`}>
+                    <StarBackground isVisible={isVisible} displayedTech={displayedTech} />
+                    {displayedTech && (
+                      <div
+                        style={{ opacity: isVisible ? 1 : 0 }}
+                        className="tech-card-active"
+                      >
+                         {/* Your card content would go here */}
                       </div>
-                    ) : (
-                      <h3 style={{ opacity: 0.4, fontSize: "2rem" }}>
-                        Hover a keycap to see more info
-                      </h3>
                     )}
                   </div>
-
                 </div>
 
                 <TechKeycaps3D setHoveredTech={handleTechHover} />
-                
               </div>
             </div>
           </div>

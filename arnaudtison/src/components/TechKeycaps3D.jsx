@@ -244,7 +244,7 @@ function Scene({ setHoveredTech }) {
 export default function TechKeycaps3D({ setHoveredTech }) {
   return (
     // FIX: Changed 100vw/vh to 100% so it fits in the parent container
-    <div style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center"}}>
+    <div style={{ width: "50%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center"}}>
       <Canvas
         shadows
         dpr={[1, 2]}

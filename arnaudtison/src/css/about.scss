@@ -35,7 +35,6 @@
   font-weight: 400;
   padding: 40px 0 60px 0;
 }
-
 .content-text-container {
   display: grid;
   gap: 20px;
@@ -62,7 +61,7 @@
   padding: 140px 100px 100px 100px;
 }
 
-.whoami-technologies-container{
+.whoami-technologies-container {
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -74,6 +73,11 @@
   font-weight: 400;
   padding: 40px 0 60px 0;
 }
+.whoami-right .whoami-technologies-container h2 p {
+  color: #666;
+  font-family: "Jetbrains Mono";
+  font-size: 18px;
+}
 
 .tech3d-wrapper {
   flex: 1;
@@ -83,27 +87,64 @@
   overflow: hidden;
 }
 
+.whoami-technologies-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%; // Ensure the main container has height
+}
+
 .whoami-technologies-container .technologies-content {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
   flex: 1;
+  min-height: 0;
   gap: 45px;
 }
 
 .technologies-content .technology-info {
-  width: 35%;
   height: 100%;
+  flex: 1;
   backdrop-filter: blur(10px);
-  border: 3px solid #000;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   text-align: center;
   font-family: "IBM Plex Serif", serif;
   font-weight: 400;
-  font-family: "IBM Plex Serif", serif;
   font-size: 24px;
   line-height: 1.7;
+}
+
+.technologies-content .technology-info .tech-info-content {
+  // 1. CLOSED STATE (Default)
+  width: 0;        // Start with no width
+  height: 2px;     // Start as a thin line (border thickness)
+  opacity: 0;      // Hide it completely when closed
+  
+  // Style basics
+  backdrop-filter: blur(6px);
+  background-color: #0a0514;
+  background-image: url("data:image/svg+xml,..."); // Your existing SVG
+  background-repeat: repeat;
+  border: 1px solid #0a0514; // Thinner border looks sharper for this effect
+  overflow: hidden; // Vital: keeps stars from spilling out during animation
+  border-radius: 12px;
+
+  transition: 
+    opacity 0s 1.2s,              // Hide opacity last
+    height 0.6s ease-in-out,      // 1st: Flatten height (0s delay)
+    width 0.6s ease-in-out 0.6s;  // 2nd: Shrink width (0.4s delay)
+
+  // 3. OPEN STATE
+  &.active {
+    width: 80%;
+    height: 100%;
+    opacity: 1;
+    transition: 
+      opacity 0s 0s,                // Show opacity immediately
+      width 0.6s ease-in-out,       // 1st: Expand width (0s delay)
+      height 0.6s ease-in-out 0.6s; // 2nd: Expand height (0.4s delay)
+  }
 }

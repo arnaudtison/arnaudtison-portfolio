@@ -1,0 +1,137 @@
+// stars.scss
+
+// 1. Config: Change colors to match your "Technical" theme
+$star-color: #fff; // Dark grey/black stars instead of white
+$bg-color: transparent; // Transparent so it blends with your white card
+// $bg-color: #f4f4f4; // OR use this if you want it to match the header grey exactly
+
+// 2. Function to generate random star coordinates
+@function generate-stars($n) {
+  // We use $star-color here instead of #FFF
+  $value: "#{random(2000)}px #{random(2000)}px #{$star-color}";
+  @for $i from 2 through $n {
+    $value: "#{$value}, #{random(2000)}px #{random(2000)}px #{$star-color}";
+  }
+  @return unquote($value);
+}
+
+// 3. Variables for animation speeds (kept the same)
+$anim-duration-small: 100s;
+$anim-duration-medium: 200s;
+$anim-duration-large: 300s;
+
+// 4. The Main Container
+.space-container {
+  // Fix from previous step: Absolute positioning to fill the parent
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+
+  // STYLE MATCH: Removed the dark radial gradient
+  background: $bg-color;
+
+  // Optional: A subtle border to define the "window" like a blueprint
+  // border: 1px solid rgba(0, 0, 0, 0.1);
+
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  // Text color inside the box (if any)
+  color: #fff;
+}
+
+// 5. Star Layers Mixin
+@mixin star-layer($size, $shadow-count, $duration) {
+  width: $size;
+  height: $size;
+  background: transparent;
+  box-shadow: generate-stars($shadow-count);
+  animation: moveStars $duration linear infinite;
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  &:after {
+    content: " ";
+    position: absolute;
+    top: 2000px;
+    width: $size;
+    height: $size;
+    background: transparent;
+    box-shadow: generate-stars($shadow-count);
+  }
+}
+
+// 6. Applying the styles
+.stars-small {
+  @include star-layer(
+    1px,
+    400,
+    $anim-duration-small
+  ); // Reduced count slightly for cleaner look
+  border-radius: 50%;
+}
+
+.stars-medium {
+  @include star-layer(2px, 100, $anim-duration-medium);
+  border-radius: 50%;
+}
+
+.stars-large {
+  @include star-layer(3px, 50, $anim-duration-large);
+  border-radius: 50%;
+}
+
+// 8. Animations (Unchanged)
+@keyframes moveStars {
+  from {
+    transform: translateY(0px);
+  }
+  to {
+    transform: translateY(-2000px);
+  }
+}
+
+.content {
+  z-index: 10;
+  text-align: left;
+  transition: all 300ms ease-in-out;
+  height: 100%;
+  padding: 16px 12px;
+}
+
+.content .tech-card {
+  background-color: transparent; // Changed from red to transparent
+  width: 100%;
+  height: 100%;
+  transition: all 200ms ease-out 0s;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  gap: 12px;
+
+  &.visible {
+    transition: all 400ms ease-in 0.5s;
+  }
+}
+
+.tech-intro-card {
+  padding: 18px;
+  width: 100%;
+  border-radius: 10px;
+  font-family: "Jetbrains Mono" !important;
+}
+.tech-intro-card h2 {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+.tech-info-card {
+  padding: 18px;
+  width: 100%;
+  border-radius: 10px;
+  flex: 1;
+}
