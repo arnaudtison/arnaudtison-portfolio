@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import TechKeycaps3D from "../components/TechKeycaps3D.jsx";
 import "../css/about.scss";
-import StarBackground from "../components/StarBackground.jsx";
 
 export default function About() {
   const sectionRef = useRef(null);
@@ -126,16 +125,17 @@ export default function About() {
 
               <div className="technologies-content">
                 <div className="technology-info">
-                  <div className={`tech-info-content ${displayedTech ? "active" : ""}`}>
-                    <StarBackground isVisible={isVisible} displayedTech={displayedTech} />
-                    {displayedTech && (
-                      <div
-                        style={{ opacity: isVisible ? 1 : 0 }}
-                        className="tech-card-active"
-                      >
-                         {/* Your card content would go here */}
+                  <div className="tech-info-content">
+                    <div
+                      style={{ opacity: isVisible ? 1 : 0 }}
+                      className="tech-card-active"
+                    >
+                      <div className="tech-card-header">
+                        <h2>{displayedTech?.label.toLowerCase()}</h2>
+                        <span>{displayedTech?.desc}</span>
                       </div>
-                    )}
+                      <p>{displayedTech?.details}</p>
+                    </div>
                   </div>
                 </div>
 
