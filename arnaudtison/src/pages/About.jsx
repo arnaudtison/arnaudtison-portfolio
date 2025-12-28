@@ -3,27 +3,25 @@ import TechKeycaps3D from "../components/TechKeycaps3D.jsx";
 import "../css/about.scss";
 
 export default function About() {
-  const sectionRef = useRef(null);
-  const trackRef = useRef(null);
+  // --- REMOVED: sectionRef and trackRef ---
 
   // 1. RAW INPUT: The data coming from the 3D keyboard (debounced)
   const [activeTech, setActiveTech] = useState(null);
 
   // 2. DISPLAY STATE: What is actually showing on screen right now
   const [displayedTech, setDisplayedTech] = useState(null);
-  // 3. VISIBILITY STATE: Controls the fade opacity (false = transparent, true = visible)
+  
+  // 3. VISIBILITY STATE: Controls the fade opacity
   const [isVisible, setIsVisible] = useState(true);
 
   const hoverTimeoutRef = useRef(null);
 
-  // DEBOUNCE HELPER (from previous step)
+  // DEBOUNCE HELPER
   const handleTechHover = (techData) => {
     if (hoverTimeoutRef.current) {
       clearTimeout(hoverTimeoutRef.current);
     }
 
-    // If hovering a key, wait 0.5s before committing (prevents flicker on fast mouseover)
-    // If leaving (null), update immediately so it doesn't get stuck
     const delay = techData ? 100 : 0;
 
     hoverTimeoutRef.current = setTimeout(() => {
@@ -31,54 +29,27 @@ export default function About() {
     }, delay);
   };
 
-  // TRANSITION EFFECT: Handles the smooth cross-fade
+  // TRANSITION EFFECT
   useEffect(() => {
-    // A. Start fading out immediately when data changes
     setIsVisible(false);
-
-    // B. Wait for the fade-out (300ms), then swap data and fade back in
     const transitionTimer = setTimeout(() => {
       setDisplayedTech(activeTech);
       setIsVisible(true);
-    }, 300); // This matches the CSS transition duration below
+    }, 300);
 
     return () => clearTimeout(transitionTimer);
   }, [activeTech]);
 
-  // [SCROLL LOGIC - Kept exactly as is]
-  useEffect(() => {
-    const section = sectionRef.current;
-    const track = trackRef.current;
-    if (!section || !track) return;
-    const START_OFFSET = 200;
-    const END_OFFSET = 200;
-    const onScroll = () => {
-      const rect = section.getBoundingClientRect();
-      const totalScrollable = section.offsetHeight - window.innerHeight;
-      const rawScroll = Math.min(Math.max(-rect.top, 0), totalScrollable);
-      const usableScroll = totalScrollable - START_OFFSET - END_OFFSET;
-      const adjustedScroll = Math.min(
-        Math.max(rawScroll - START_OFFSET, 0),
-        usableScroll
-      );
-      const progress = usableScroll > 0 ? adjustedScroll / usableScroll : 0;
-      const maxX = track.scrollWidth - window.innerWidth;
-      const x = maxX * progress;
-      track.style.transform = `translateX(${-x}px)`;
-    };
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
-    };
-  }, []);
+  // --- REMOVED: The entire Scroll Logic useEffect ---
 
   return (
-    <section className="whoami-scroll-section" ref={sectionRef}>
+    // REMOVED: ref={sectionRef} from the section
+    <section className="whoami-scroll-section">
       <div className="whoami-sticky">
-        <div className="whoami-track" ref={trackRef}>
+        {/* REMOVED: ref={trackRef} from the div */}
+        <div className="whoami-track">
+          
+          {/* Left Panel */}
           <div className="whoami-panel whoami-left">
             <div className="whoami-content-container">
               <h2>WHO AM I?</h2>
@@ -116,6 +87,7 @@ export default function About() {
             </div>
           </div>
 
+          {/* Right Panel */}
           <div className="whoami-panel whoami-right">
             <div className="whoami-technologies-container">
               <h2>

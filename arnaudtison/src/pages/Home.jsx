@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import imageSelf from "../assets/imageSelf.png";
 import About from "./About.jsx";
+import Work from "./Work.jsx";
+import ProgressiveBlurBar from "../components/ProgressiveBlurBar.jsx";
 import "../css/home.scss";
 
 function Home() {
@@ -21,7 +23,11 @@ function Home() {
         setCurrentRole((prev) => (prev + 1) % roles.length);
         setIsDeleting(false);
       } else {
-        setDisplayText(isDeleting ? displayText.slice(0, -1) : displayText + role[displayText.length]);
+        setDisplayText(
+          isDeleting
+            ? displayText.slice(0, -1)
+            : displayText + role[displayText.length]
+        );
       }
     }, delay);
 
@@ -53,9 +59,15 @@ function Home() {
               <span>java</span>
               <div className="syntax-wrapper">
                 <p>String[] roles = {"{"}</p>
-                <p>"<b>Full-Stack Developer</b>",</p>
-                <p>"<b>Designer</b>",</p>
-                <p>"<b>Student</b>"</p>
+                <p>
+                  "<b>Full-Stack Developer</b>",
+                </p>
+                <p>
+                  "<b>Designer</b>",
+                </p>
+                <p>
+                  "<b>Student</b>"
+                </p>
                 <p>{"}"};</p>
                 <br />
                 <p>for (String role : roles) {"{"}</p>
@@ -64,7 +76,11 @@ function Home() {
               </div>
             </div>
             <div className="syntax-block-output">
-              <p>{">"} portfolio.java: I am a <span className="typing-text">{displayText}</span><span className="cursor">|</span></p>
+              <p>
+                {">"} portfolio.java: I am a{" "}
+                <span className="typing-text">{displayText}</span>
+                <span className="cursor">|</span>
+              </p>
             </div>
           </div>
           <div className="image-container right">
@@ -106,8 +122,10 @@ function Home() {
       {/* <ScrollIndicator /> */}
 
       <About />
-      {/* <Work />
-      <Contact /> */}
+      <Work />
+      {/* <Contact /> */}
+
+      <ProgressiveBlurBar />
     </div>
   );
 }
