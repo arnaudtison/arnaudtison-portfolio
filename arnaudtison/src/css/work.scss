@@ -1,16 +1,142 @@
 .work-section {
-    height: 100vh;
-    position: relative;
-    padding: 140px 100px 0 100px;
+  height: 100vh;
+  position: relative;
+  padding-top: 140px;
 }
 
 .work-section .work-content {
-    height: 100%;
-    width: 100%;
+  height: 100%;
+  width: 100%;
 }
 .work-content h2 {
-    font-family: "Jetbrains Mono", monospace;
-    font-size: 44px;
-    font-weight: 400;
-    padding: 40px 0 60px 0;
+  font-family: "Jetbrains Mono", monospace;
+  font-size: 44px;
+  font-weight: 400;
+  padding: 40px 100px 60px 100px;
+}
+
+.work-spotlight {
+  width: 100%;
+  height: 550px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+//   background-color: red;
+}
+
+.work-carousel-wrapper {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  perspective: 2000px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.work-carousel {
+  aspect-ratio: 16/9;
+  height: 100%;
+  position: absolute;
+  transform-style: preserve-3d;
+  transition: transform 1s;
+}
+
+.work-item {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  line-height: 116px;
+  font-size: 80px;
+  font-weight: bold;
+  color: white;
+  text-align: center;
+  transition: transform 1s, opacity 1s;
+}
+
+// buttons
+.previous-button,
+.next-button {
+    position: absolute;
+    border: none;
+    z-index: 10;
+    background: none;
+    // background: #ffffffc0;
+    padding: 18px 12px;
+    cursor: pointer;
+    
+    // display: flex;
+    // justify-content: center;
+    // align-items: center;
+}
+
+.previous-button {
+    left: 25px;
+}
+.next-button {
+    right: 25px;
+}
+
+.bouncy-arrow-next {
+  cursor: pointer;
+  overflow: visible;
+  transition: transform 0.2s ease;
+
+  .arrow-part {
+    transition: transform 0.2s ease;
+    transform-origin: center;
+  }
+  &:hover {
+    transform: scale(1.05);
+    .arrow-part {
+      animation: hitWallNext 1s ease-in-out infinite;
+    }
+  }
+}
+.bouncy-arrow-prev {
+  cursor: pointer;
+  overflow: visible;
+  transition: transform 0.2s ease;
+
+  .arrow-part {
+    transition: transform 0.2s ease;
+    transform-origin: center;
+  }
+  &:hover {
+    transform: scale(1.05);
+    .arrow-part {
+      animation: hitWallPrev 1s ease-in-out infinite;
+    }
+  }
+}
+
+@keyframes hitWallNext {
+  0% {
+    transform: translateX(0);
+  }
+  30% {
+    transform: translateX(-5px); 
+  }
+  50% {
+    transform: translateX(14px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes hitWallPrev {
+  0% {
+    transform: translateX(0);
+  }
+  30% {
+    transform: translateX(-14px);
+  }
+  50% {
+    transform: translateX(5px);
+  }
+  100% {
+    transform: translateX(0);
+  }
 }
