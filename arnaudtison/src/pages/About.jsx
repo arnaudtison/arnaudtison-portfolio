@@ -10,7 +10,7 @@ export default function About() {
 
   // 2. DISPLAY STATE: What is actually showing on screen right now
   const [displayedTech, setDisplayedTech] = useState(null);
-  
+
   // 3. VISIBILITY STATE: Controls the fade opacity
   const [isVisible, setIsVisible] = useState(true);
 
@@ -48,7 +48,6 @@ export default function About() {
       <div className="whoami-sticky">
         {/* REMOVED: ref={trackRef} from the div */}
         <div className="whoami-track">
-          
           {/* Left Panel */}
           <div className="whoami-panel whoami-left">
             <div className="whoami-content-container">
@@ -110,10 +109,9 @@ export default function About() {
                     </div>
                   </div>
                 </div>
-
-                <TechKeycaps3D setHoveredTech={handleTechHover} />
               </div>
             </div>
+            <TechKeycaps3D setHoveredTech={handleTechHover} />
           </div>
         </div>
       </div>

@@ -115,12 +115,12 @@ export default function Work() {
                       zIndex: zIndex,
                       opacity: opacity,
                       transition: "transform .7s ease-out, opacity 0.5s ease",
-                      backgroundImage: `url(${images[i]})`,
+                      // backgroundImage: `url(${images[i]})`,
+                      backgroundColor: "#e0e0e0",
                       backgroundSize: "cover",
                       backgroundPosition: "center",
                     }}
                   >
-                    {/* <div className="card-visual">Item {i + 1}</div> */}
                   </div>
                 );
               })}

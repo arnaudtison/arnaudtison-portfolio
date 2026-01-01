@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import imageSelf from "../assets/imageSelf.png";
 import About from "./About.jsx";
 import Work from "./Work.jsx";
+import Contact from "./Contact.jsx";
 import ProgressiveBlurBar from "../components/ProgressiveBlurBar.jsx";
 import "../css/home.scss";
 
@@ -123,7 +124,7 @@ function Home() {
 
       <About />
       <Work />
-      {/* <Contact /> */}
+      <Contact />
 
       <ProgressiveBlurBar />
     </div>
