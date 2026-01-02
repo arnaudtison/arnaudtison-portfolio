@@ -6,11 +6,16 @@ import Contact from "./Contact.jsx";
 import ProgressiveBlurBar from "../components/ProgressiveBlurBar.jsx";
 import "../css/home.scss";
 
-function Home() {
+import CustomCursor from "custom-cursor-react";
+import OutlineFollower from "../components/OutlineFollower.jsx";
+import "custom-cursor-react/dist/index.css";
+
+function Home({ cursorEnabled }) {
   const roles = ["Full-Stack Developer", "Designer", "Student"];
   const [currentRole, setCurrentRole] = useState(0);
   const [displayText, setDisplayText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
+  const [cursorEnabledPage, setCursorEnabledPage] = useState(false);
 
   useEffect(() => {
     const role = roles[currentRole];
@@ -36,7 +41,22 @@ function Home() {
   }, [displayText, isDeleting, currentRole, roles]);
 
   return (
-    <div className="page-wrapper">
+    <div onMouseEnter={() => setCursorEnabledPage(true)} className="page-wrapper">
+      {(cursorEnabled || cursorEnabledPage) && (
+        <>
+          <CustomCursor
+            targets={[]}
+            opacity={1}
+            customClass="custom-cursor"
+            dimensions={12}
+            fill="#000000ff"
+            smoothness={{ movement: 0.5, scale: 0.1, opacity: 0.2 }}
+            targetOpacity={0.5}
+          />
+          <OutlineFollower size={60} speed={0.08} />
+        </>
+      )}
+
       <div className="landing-wrapper">
         <div className="horizontal-slider">
           <div className="marquee">
