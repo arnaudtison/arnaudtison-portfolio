@@ -10,7 +10,9 @@ import CustomCursor from "custom-cursor-react";
 import OutlineFollower from "../components/OutlineFollower.jsx";
 import "custom-cursor-react/dist/index.css";
 
-function Home({ cursorEnabled }) {
+function Home({ cursorEnabled, homePageRef, aboutPageRef, technologiesPageRef,
+  workPageRef, contactPageRef
+ }) {
   const roles = ["Full-Stack Developer", "Designer", "Student"];
   const [currentRole, setCurrentRole] = useState(0);
   const [displayText, setDisplayText] = useState("");
@@ -57,7 +59,7 @@ function Home({ cursorEnabled }) {
         </>
       )}
 
-      <div className="landing-wrapper">
+      <div ref={homePageRef} className="landing-wrapper">
         <div className="horizontal-slider">
           <div className="marquee">
             <div className="marquee__track">

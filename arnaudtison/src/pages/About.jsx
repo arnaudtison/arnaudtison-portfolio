@@ -40,13 +40,9 @@ export default function About() {
     return () => clearTimeout(transitionTimer);
   }, [activeTech]);
 
-  // --- REMOVED: The entire Scroll Logic useEffect ---
-
   return (
-    // REMOVED: ref={sectionRef} from the section
-    <section className="whoami-scroll-section">
+    <div className="whoami-scroll-section">
       <div className="whoami-sticky">
-        {/* REMOVED: ref={trackRef} from the div */}
         <div className="whoami-track">
           {/* Left Panel */}
           <div className="whoami-panel whoami-left">
@@ -115,6 +111,6 @@ export default function About() {
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 }

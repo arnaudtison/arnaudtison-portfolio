@@ -82,6 +82,10 @@ html, body {
   font-weight: 400;
 }
 
+.redirect-links-container .redirect-link {
+  user-select: none;
+}
+
 .redirect-links-container .external-links-container {
   display: flex;
   flex-direction: row;
