@@ -1,112 +1,155 @@
-import '../css/Home.scss';
-import IonIcon from '@reacticons/ionicons';
-import logo from '../assets/logo.png';
-import HomeSection from '../components/HomeSection.jsx';
-import AboutSection from '../components/AboutSection.jsx';
-import ProjectsSection from '../components/ProjectsSection.jsx';
-import ConnectSection from '../components/ConnectSection.jsx';
+import { useState, useEffect } from "react";
+import imageSelf from "../assets/imageSelf.png";
+import About from "./About.jsx";
+import Work from "./Work.jsx";
+import Contact from "./Contact.jsx";
+import ProgressiveBlurBar from "../components/ProgressiveBlurBar.jsx";
+import "../css/home.scss";
 
-function Home() {
-  const projects = '{ projects }';
-  const about = '{ about }';
-  const connect = '{ connect }';
-  const home = '{ home }';
+import CustomCursor from "custom-cursor-react";
+import OutlineFollower from "../components/OutlineFollower.jsx";
+import "custom-cursor-react/dist/index.css";
 
-  const toggleMenu = () => {
-    const menu = document.querySelector('.nav-menu-mobile');
-    const body = document.body;
+function Home({ cursorEnabled, homePageRef, aboutPageRef, technologiesPageRef,
+  workPageRef, contactPageRef
+ }) {
+  const roles = ["Full-Stack Developer", "Designer", "Student"];
+  const [currentRole, setCurrentRole] = useState(0);
+  const [displayText, setDisplayText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [cursorEnabledPage, setCursorEnabledPage] = useState(false);
 
-    if (menu.style.transform === 'translateY(0px)') {
-      menu.style.transform = 'translateY(-100%)';
-      body.style.overflowY = 'scroll'; // Enable scrolling
-    } else {
-      menu.style.transform = 'translateY(0px)';
-      body.style.overflowY = 'hidden'; // Disable scrolling
-    }
-  };
+  useEffect(() => {
+    const role = roles[currentRole];
+    const delay = isDeleting ? 50 : 100;
+    const target = isDeleting ? "" : role;
 
-  const scrollToSection = (id, priority) => {
-    const section = document.getElementById(id);
-    const menu = document.querySelector('.nav-menu-mobile');
-
-    if (priority) {
-      console.log(menu.style.transform === 'translateY(0px)');
-
-      if (menu.style.transform === 'translateY(0px)') {
-        menu.style.transform = 'translateY(-100%)';
-        setTimeout(() => {
-          section.scrollIntoView({ behavior: 'smooth' });
-        }, 400);
+    const timeout = setTimeout(() => {
+      if (!isDeleting && displayText === role) {
+        setTimeout(() => setIsDeleting(true), 2000);
+      } else if (isDeleting && displayText === "") {
+        setCurrentRole((prev) => (prev + 1) % roles.length);
+        setIsDeleting(false);
       } else {
-        section.scrollIntoView({ behavior: 'smooth' });
+        setDisplayText(
+          isDeleting
+            ? displayText.slice(0, -1)
+            : displayText + role[displayText.length]
+        );
       }
-    } else {
-      toggleMenu();
-      setTimeout(() => {
-        section.scrollIntoView({ behavior: 'smooth' });
-      }, 400);
-    }
-  };
+    }, delay);
+
+    return () => clearTimeout(timeout);
+  }, [displayText, isDeleting, currentRole, roles]);
 
   return (
-    <>
-      <div className='nav-menu-mobile'>
-        <div className='center'>
-          <ul>
-            <li>
-              <a onClick={() => scrollToSection('home')}>{home}</a>
-            </li>
-            <li>
-              <a onClick={() => scrollToSection('about')}>{about}</a>
-            </li>
-            <li>
-              <a onClick={() => scrollToSection('projects')}>{projects}</a>
-            </li>
-            <li>
-              <a onClick={() => scrollToSection('connect')}>{connect}</a>
-            </li>
-          </ul>
-        </div>
-      </div>
+    <div onMouseEnter={() => setCursorEnabledPage(true)} className="page-wrapper">
+      {(cursorEnabled || cursorEnabledPage) && (
+        <>
+          <CustomCursor
+            targets={[]}
+            opacity={1}
+            customClass="custom-cursor"
+            dimensions={12}
+            fill="#000000ff"
+            smoothness={{ movement: 0.5, scale: 0.1, opacity: 0.2 }}
+            targetOpacity={0.5}
+          />
+          <OutlineFollower size={60} speed={0.08} />
+        </>
+      )}
 
-      <div className='page-wrapper'>
-        <div className='nav-wrapper'>
-          <div className='logo'>
-            <img
-              onClick={() => scrollToSection('home', true)}
-              width={35}
-              src={logo}
-              className='logo-img'
-            />
-          </div>
-          <div className='info'>
-            <div className='name'>TISON A.</div>
-            <div className='title'>APPLIED IT STUDENT</div>
-          </div>
-          <div className='menu'>
-            <IonIcon
-              onClick={toggleMenu}
-              name='menu-sharp'
-              className='menu-icon'
-            />
+      <div ref={homePageRef} className="landing-wrapper">
+        <div className="horizontal-slider">
+          <div className="marquee">
+            <div className="marquee__track">
+              <span className="marquee__content">
+                ARNAUD TISON&nbsp;ARNAUD TISON&nbsp;ARNAUD TISON&nbsp;ARNAUD
+                TISON&nbsp;ARNAUD TISON&nbsp;ARNAUD TISON&nbsp;ARNAUD
+                TISON&nbsp;ARNAUD TISON&nbsp;
+              </span>
+              <span className="marquee__content" aria-hidden="true">
+                ARNAUD TISON&nbsp;ARNAUD TISON&nbsp;ARNAUD TISON&nbsp;ARNAUD
+                TISON&nbsp;ARNAUD TISON&nbsp;ARNAUD TISON&nbsp;ARNAUD
+                TISON&nbsp;ARNAUD TISON&nbsp;
+              </span>
+            </div>
           </div>
         </div>
-        <div className='section-wrapper'>
-          <div className='section home' id='home'>
-            <HomeSection scrollToSection={scrollToSection} />
+        <div className="content-grid">
+          <div className="syntax-block left">
+            <div className="syntax-block-input">
+              <span>java</span>
+              <div className="syntax-wrapper">
+                <p>String[] roles = {"{"}</p>
+                <p>
+                  "<b>Full-Stack Developer</b>",
+                </p>
+                <p>
+                  "<b>Designer</b>",
+                </p>
+                <p>
+                  "<b>Student</b>"
+                </p>
+                <p>{"}"};</p>
+                <br />
+                <p>for (String role : roles) {"{"}</p>
+                <p>System.out.println("I am a " + role);</p>
+                <p>{"}"}</p>
+              </div>
+            </div>
+            <div className="syntax-block-output">
+              <p>
+                {">"} portfolio.java: I am a{" "}
+                <span className="typing-text">{displayText}</span>
+                <span className="cursor">|</span>
+              </p>
+            </div>
           </div>
-          <div className='section about' id='about'>
-            <AboutSection />
+          <div className="image-container right">
+            <img src={imageSelf} alt="Arnaud Tison" />
           </div>
-          <div className='section projects' id='projects'>
-            <ProjectsSection />
-          </div>
-          <div className='section connect' id='connect'>
-            <ConnectSection />
+        </div>
+        <div className="horizontal-language-slider">
+          <div className="marquee marquee--reverse">
+            <div className="marquee__track">
+              <div className="marquee__content">
+                <span>HTML</span>
+                <span>CSS</span>
+                <span>JAVA</span>
+                <span>JAVASCRIPT</span>
+                <span>TYPESCRIPT</span>
+                <span>REACT</span>
+                <span>C#</span>
+                <span>BLAZOR</span>
+                <span>PYTHON</span>
+                <span>SQL</span>
+              </div>
+
+              <div className="marquee__content" aria-hidden="true">
+                <span>HTML</span>
+                <span>CSS</span>
+                <span>JAVA</span>
+                <span>JAVASCRIPT</span>
+                <span>TYPESCRIPT</span>
+                <span>REACT</span>
+                <span>C#</span>
+                <span>BLAZOR</span>
+                <span>PYTHON</span>
+                <span>SQL</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </>
+      {/* <ScrollIndicator /> */}
+
+      <About />
+      <Work />
+      <Contact />
+
+      <ProgressiveBlurBar />
+    </div>
   );
 }
 

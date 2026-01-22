@@ -1,0 +1,286 @@
+// scrollbar styling
+
+/* 1. The Scrollbar container */
+::-webkit-scrollbar {
+    width: 10px;              /* Width of vertical scrollbar */
+    height: 10px;             /* Height of horizontal scrollbar */
+}
+
+/* 2. The Track (background) */
+::-webkit-scrollbar-track {
+    background: #ffffff;      /* Color of the track */
+    border-radius: 4px;       /* Optional: rounded edges */
+}
+
+/* 3. The Handle (thumb) */
+::-webkit-scrollbar-thumb {
+    background: #000000;         /* Color of the handle */
+}
+
+/* 4. Handle on Hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #2a2a2a;         /* Darker color when hovering */
+}
+
+/* 5. The Corner (if both scrollbars are visible) */
+::-webkit-scrollbar-corner {
+    background: transparent;
+}
+
+//
+
+html, body {
+  cursor: none !important
+}
+.custom-cursor {
+  z-index: 110;
+}
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.blur-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100px; /* Adjust height to taste */
+  z-index: 50;
+  pointer-events: none;
+}
+
+.navigation-wrapper {
+  font-family: "Jetbrains Mono";
+  position: fixed;
+  backdrop-filter: blur(6px);
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.2'/%3E%3C/svg%3E");  background-repeat: repeat;
+  background-color: rgba(215, 215, 215, 0.529);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 35px 100px 25px 100px;
+  z-index: 100;
+  transition: all .2s ease-in-out;
+}
+
+.navigation-wrapper .logo-container img {
+  height: 80px;
+  width: auto;
+}
+
+.navigation-wrapper .redirect-links-container {
+  display: flex;
+  flex-direction: row;
+  gap: 100px;
+  font-size: 28px;
+  font-weight: 400;
+}
+
+.redirect-links-container .redirect-link {
+  user-select: none;
+}
+
+.redirect-links-container .external-links-container {
+  display: flex;
+  flex-direction: row;
+  gap: 25px;
+}
+
+.landing-wrapper {
+  height: 100vh;
+  padding-top: 140px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+/* HORIZONTAL NAME SLIDER */
+
+.horizontal-slider {
+  overflow: hidden;
+  width: 100%;
+}
+
+.horizontal-slider .marquee {
+  width: 100%;
+  overflow: hidden;
+}
+
+.horizontal-slider .marquee .marquee__track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+  animation: marquee 200s linear infinite;
+}
+
+.horizontal-slider .marquee .marquee__track .marquee__content {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+
+  font-family: "Anton";
+  font-size: 170px;
+  -webkit-text-stroke: 3px black;
+  color: transparent;
+}
+
+.horizontal-slider .marquee .marquee__track .marquee__content > * {
+  display: inline-block;
+}
+
+@keyframes marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+/* SYNTAX BLOCK + IMAGE */
+
+.landing-wrapper .content-grid {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 150px 0 100px;
+}
+
+.content-grid .syntax-block {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 600px;
+}
+
+.syntax-block .syntax-block-input {
+  position: relative;
+  font-family: "Jetbrains Mono";
+  font-size: 20px;
+  color: #fff;
+  background: #373737;
+  padding: 20px;
+  width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 0 13px rgba(0, 0, 0, 0.7);
+}
+
+.syntax-block .syntax-block-input span {
+  color: #9d9d9d;
+  position: absolute;
+  right: 20px;
+  top: 15px;
+  font-size: 18px;
+}
+
+.syntax-wrapper p {
+  margin: 4px 0;
+}
+
+.syntax-wrapper p:nth-child(2),
+.syntax-wrapper p:nth-child(3),
+.syntax-wrapper p:nth-child(4),
+.syntax-wrapper p:nth-child(8) {
+  padding-left: 45px;
+}
+
+.syntax-block .syntax-block-output {
+  font-family: "Jetbrains Mono";
+  font-size: 18px;
+  color: #fff;
+  background: #373737;
+  padding: 15px 20px;
+  width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 0 13px rgba(0, 0, 0, 0.7);
+}
+
+.typing-text {
+  display: inline;
+}
+
+.cursor {
+  display: inline-block;
+  margin-left: 2px;
+  animation: blink 0.6s infinite;
+}
+
+@keyframes blink {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  51%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.content-grid .image-container img {
+  margin-top: -140px;
+}
+
+/* LANGUAGE SLIDER */
+.horizontal-language-slider {
+  margin-top: auto;
+  width: 100%;
+  overflow: hidden;
+  padding: 50px 0;
+}
+.horizontal-language-slider .marquee {
+  width: 100%;
+  overflow: hidden;
+}
+.horizontal-language-slider .marquee__track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+  animation: marquee-left 30s linear infinite;
+}
+.horizontal-language-slider .marquee__content {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  font-family: "Jetbrains Mono";
+  font-size: 20px;
+}
+.horizontal-language-slider .marquee__content span + span::before {
+  content: "//";
+  margin: 0 30px;
+}
+.horizontal-language-slider .marquee__content::after {
+  content: "//";
+  margin: 0 30px;
+  opacity: 1;
+}
+
+.horizontal-language-slider .marquee--reverse .marquee__track {
+  animation-name: marquee-right;
+}
+
+@keyframes marquee-left {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes marquee-right {
+  from {
+    transform: translate3d(-50%, 0, 0);
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}

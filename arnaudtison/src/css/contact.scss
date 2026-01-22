@@ -1,0 +1,89 @@
+.contact-section {
+//   height: 0;
+  padding: 0 100px 100px 100px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+.contact-section .contact-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-content h2 {
+  font-family: "Jetbrains Mono", monospace;
+  font-size: 44px;
+  font-weight: 400;
+  padding: 40px 0 60px 0;
+}
+
+.contact-content .contact-fields {
+    display: flex;
+    flex-direction: row;
+    gap: 20%;
+}
+.contact-fields .contact-fields-col {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 30px
+}
+.contact-fields .contact-fields-col .field {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+.contact-fields-col .field span {
+    font-family: 'IBM Plex Serif';
+    font-size: 25px;
+    font-weight: 0;
+}
+.contact-fields-col .field input, 
+.contact-fields-col .field textarea {
+    border: 2px solid black;
+    height: 60px;
+    font-size: 22px;
+    padding: 12px;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: 'IBM Plex Serif';
+    transition: box-shadow .2s ease-in-out;
+}
+.contact-fields-col:last-of-type .field:last-of-type textarea { 
+    height: 100%; 
+    resize: none;
+}
+.contact-fields-col .field input:focus, 
+.contact-fields-col .field textarea:focus {
+    outline: none;
+    border: 2px solid black;
+    box-shadow: 0 0 8px 1.5px rgba(0, 0, 0, 0.25);
+}
+
+.contact-fields-col:first-of-type .field { height: calc(100%/3) }
+.contact-fields-col:last-of-type .field:first-of-type { height: calc(100%/3)}
+.contact-fields-col:last-of-type .field:last-of-type { height: calc(100% * (2/3))}
+
+.contact-content .contact-fields-submit {
+    display: flex;
+    justify-content: flex-end;
+    padding: 30px 0 0 0;
+}
+.contact-fields-submit button {
+    background-color: black;
+    border: none;
+    color: white;
+    font-family: "IBM Plex Serif";
+    padding: 16px 75px;
+    font-size: 22px;
+    box-shadow: inset 0 0 0 2px black;
+   transition:
+        background-color .2s ease-in-out,
+        color .2s ease-in-out;
+    cursor: pointer;
+}
+.contact-fields-submit button:hover {
+    background-color: white;
+    color: black;
+}
