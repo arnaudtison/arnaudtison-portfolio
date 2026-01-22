@@ -10,7 +10,7 @@ export default function About() {
 
   // 2. DISPLAY STATE: What is actually showing on screen right now
   const [displayedTech, setDisplayedTech] = useState(null);
-  
+
   // 3. VISIBILITY STATE: Controls the fade opacity
   const [isVisible, setIsVisible] = useState(true);
 
@@ -40,22 +40,17 @@ export default function About() {
     return () => clearTimeout(transitionTimer);
   }, [activeTech]);
 
-  // --- REMOVED: The entire Scroll Logic useEffect ---
-
   return (
-    // REMOVED: ref={sectionRef} from the section
-    <section className="whoami-scroll-section">
+    <div className="whoami-scroll-section">
       <div className="whoami-sticky">
-        {/* REMOVED: ref={trackRef} from the div */}
         <div className="whoami-track">
-          
           {/* Left Panel */}
           <div className="whoami-panel whoami-left">
             <div className="whoami-content-container">
               <h2>WHO AM I?</h2>
               <div className="content-text-container">
                 <p>
-                  Hi, I'm Arnaud Tison, a 19-year-old student in Applied IT at
+                  Hi, I'm Arnaud Tison, a 20-year-old student in Applied IT at
                   the University College of Ghent in Belgium. I live in Brakel,
                   a small town in the Flemish Ardennes. I started programming
                   when I was 12 and never really stopped. Over the years, I've
@@ -64,7 +59,7 @@ export default function About() {
                 </p>
                 <p>
                   I really enjoy creating user-friendly and visually appealing
-                  websites from scratch. I prefer writing my own HTML and CSS
+                  websites from scratc h. I prefer writing my own HTML and CSS
                   instead of using drag-and-drop libraries. In my opinion, it
                   gives me more control over what I'm building and helps me
                   understand every part of it.
@@ -110,13 +105,12 @@ export default function About() {
                     </div>
                   </div>
                 </div>
-
-                <TechKeycaps3D setHoveredTech={handleTechHover} />
               </div>
             </div>
+            <TechKeycaps3D setHoveredTech={handleTechHover} />
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 }
