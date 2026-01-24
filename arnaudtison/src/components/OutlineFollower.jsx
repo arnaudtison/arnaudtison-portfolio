@@ -37,7 +37,6 @@ export default function OutlineFollower({ size = 0, speed = 0 }) {
         started.current = true;
         window.addEventListener("mousemove", onMove, { passive: true });
         raf.current = requestAnimationFrame(animate);
-        console.log(AnimationTimeline.length.valueOf(raf));
       }
     };
 

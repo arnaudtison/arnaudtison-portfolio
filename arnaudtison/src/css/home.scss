@@ -243,7 +243,7 @@ html, body {
   display: flex;
   width: max-content;
   will-change: transform;
-  animation: marquee-left 30s linear infinite;
+  animation: marquee-left 50s linear infinite;
 }
 .horizontal-language-slider .marquee__content {
   flex: 0 0 auto;
@@ -253,14 +253,16 @@ html, body {
   font-family: "Jetbrains Mono";
   font-size: 20px;
 }
-.horizontal-language-slider .marquee__content span + span::before {
-  content: "//";
-  margin: 0 30px;
+
+.horizontal-language-slider .marquee__content span {
+    position: relative;
+    margin-right: 80px; /* Ruimte na het woord voor de slash */
 }
-.horizontal-language-slider .marquee__content::after {
-  content: "//";
-  margin: 0 30px;
-  opacity: 1;
+
+.horizontal-language-slider .marquee__content span::after {
+    content: "//";
+    position: absolute;
+    right: -55px;
 }
 
 .horizontal-language-slider .marquee--reverse .marquee__track {

@@ -10,14 +10,25 @@ import CustomCursor from "custom-cursor-react";
 import OutlineFollower from "../components/OutlineFollower.jsx";
 import "custom-cursor-react/dist/index.css";
 
-function Home({ cursorEnabled, homePageRef, aboutPageRef, technologiesPageRef,
-  workPageRef, contactPageRef
- }) {
+function Home({ cursorEnabled }) {
   const roles = ["Full-Stack Developer", "Designer", "Student"];
   const [currentRole, setCurrentRole] = useState(0);
   const [displayText, setDisplayText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
   const [cursorEnabledPage, setCursorEnabledPage] = useState(false);
+
+  const languages = [
+    "HTML",
+    "CSS",
+    "JAVA",
+    "JAVASCRIPT",
+    "TYPESCRIPT",
+    "REACT",
+    "C#",
+    "BLAZOR",
+    "PYTHON",
+    "SQL",
+  ];
 
   useEffect(() => {
     const role = roles[currentRole];
@@ -34,7 +45,7 @@ function Home({ cursorEnabled, homePageRef, aboutPageRef, technologiesPageRef,
         setDisplayText(
           isDeleting
             ? displayText.slice(0, -1)
-            : displayText + role[displayText.length]
+            : displayText + role[displayText.length],
         );
       }
     }, delay);
@@ -43,7 +54,10 @@ function Home({ cursorEnabled, homePageRef, aboutPageRef, technologiesPageRef,
   }, [displayText, isDeleting, currentRole, roles]);
 
   return (
-    <div onMouseEnter={() => setCursorEnabledPage(true)} className="page-wrapper">
+    <div
+      onMouseEnter={() => setCursorEnabledPage(true)}
+      className="page-wrapper"
+    >
       {(cursorEnabled || cursorEnabledPage) && (
         <>
           <CustomCursor
@@ -59,7 +73,7 @@ function Home({ cursorEnabled, homePageRef, aboutPageRef, technologiesPageRef,
         </>
       )}
 
-      <div ref={homePageRef} className="landing-wrapper">
+      <div className="landing-wrapper">
         <div className="horizontal-slider">
           <div className="marquee">
             <div className="marquee__track">
@@ -114,29 +128,21 @@ function Home({ cursorEnabled, homePageRef, aboutPageRef, technologiesPageRef,
           <div className="marquee marquee--reverse">
             <div className="marquee__track">
               <div className="marquee__content">
-                <span>HTML</span>
-                <span>CSS</span>
-                <span>JAVA</span>
-                <span>JAVASCRIPT</span>
-                <span>TYPESCRIPT</span>
-                <span>REACT</span>
-                <span>C#</span>
-                <span>BLAZOR</span>
-                <span>PYTHON</span>
-                <span>SQL</span>
+                {languages.map((lang, i) => (
+                  <span key={`a-${i}`}>{lang}</span>
+                ))}
+                {languages.map((lang, i) => (
+                  <span key={`b-${i}`}>{lang}</span>
+                ))}
               </div>
 
               <div className="marquee__content" aria-hidden="true">
-                <span>HTML</span>
-                <span>CSS</span>
-                <span>JAVA</span>
-                <span>JAVASCRIPT</span>
-                <span>TYPESCRIPT</span>
-                <span>REACT</span>
-                <span>C#</span>
-                <span>BLAZOR</span>
-                <span>PYTHON</span>
-                <span>SQL</span>
+                {languages.map((lang, i) => (
+                  <span key={`c-${i}`}>{lang}</span>
+                ))}
+                {languages.map((lang, i) => (
+                  <span key={`d-${i}`}>{lang}</span>
+                ))}
               </div>
             </div>
           </div>

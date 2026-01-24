@@ -70,7 +70,6 @@ export default function Contact() {
                     },
                     (error) => {
                         setStatus("Failed to send. Please try again.");
-                        console.log(error.text);
                         setIsSending(false);
                     }
                 );
