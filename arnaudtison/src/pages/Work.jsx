@@ -1,15 +1,14 @@
-import { useEffect, useMemo, useRef, useState } from "react";
-import "../css/work.scss";
+import { useEffect, useMemo, useRef, useState } from 'react';
+import '../css/work.scss';
 
-import work1 from "../assets/work/work1.jpg";
-import work2 from "../assets/work/work2.jpg";
-import work3 from "../assets/work/work3.jpg";
-import work4 from "../assets/work/work4.jpg";
-import work5 from "../assets/work/work5.jpg";
-import work6 from "../assets/work/work6.jpg";
+import work1 from '../assets/work/Belvedere.png';
+import work2 from '../assets/work/Delaware.png';
+import work3 from '../assets/work/Musicplayer.png';
+import work4 from '../assets/work/Nodo.png';
+import work5 from '../assets/work/Springboot.png';
 
 export default function Work() {
-  const cellCount = 6;
+  const cellCount = 5;
   const carouselRef = useRef(null);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [radius, setRadius] = useState(0);
@@ -28,11 +27,11 @@ export default function Work() {
     };
 
     compute();
-    window.addEventListener("resize", compute);
-    return () => window.removeEventListener("resize", compute);
+    window.addEventListener('resize', compute);
+    return () => window.removeEventListener('resize', compute);
   }, [cellCount]);
 
-  const images = useMemo(() => [work1, work2, work3, work4, work5, work6], []);
+  const images = useMemo(() => [work1, work2, work3, work4, work5], []);
   const items = useMemo(() => Array.from({ length: cellCount }), [cellCount]);
 
   const handleNext = () => {
@@ -69,7 +68,7 @@ export default function Work() {
               viewBox="0 0 256 256"
               className="bouncy-arrow-prev"
             >
-              <g style={{ transformOrigin: "center", transform: "scaleX(-1)" }}>
+              <g style={{ transformOrigin: 'center', transform: 'scaleX(-1)' }}>
                 <path
                   className="arrow-part"
                   d="M189.66,122.34a8,8,0,0,1,0,11.32l-72,72a8,8,0,0,1-11.32-11.32L164.69,136H32a8,8,0,0,1,0-16H164.69L106.34,61.66a8,8,0,0,1,11.32-11.32Z"
@@ -114,11 +113,12 @@ export default function Work() {
                       transform: `translate3d(${tx}px, 0px, ${tz}px)`,
                       zIndex: zIndex,
                       opacity: opacity,
-                      transition: "transform .7s ease-out, opacity 0.5s ease",
-                      // backgroundImage: `url(${images[i]})`,
-                      backgroundColor: "#e0e0e0",
-                      backgroundSize: "cover",
-                      backgroundPosition: "center",
+                      transition: 'transform .7s ease-out, opacity 0.5s ease',
+                      backgroundImage: `url(${images[i]})`,
+                      backgroundColor: 'transparent',
+                      backgroundSize: 'contain',
+                      backgroundPosition: 'center',
+                      backgroundRepeat: 'no-repeat',
                     }}
                   >
                   </div>
