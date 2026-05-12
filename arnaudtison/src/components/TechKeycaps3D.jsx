@@ -1,124 +1,118 @@
-// TechKeycaps3D.jsx
-import { useMemo, useRef, useState, useEffect, Suspense } from "react";
-import * as THREE from "three";
-import { Canvas, useFrame, useThree } from "@react-three/fiber";
+/* eslint-disable react/no-unknown-property */
+import { useMemo, useRef, useState, useEffect, Suspense } from 'react';
+import * as THREE from 'three';
+import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import {
   Center,
-  ContactShadows,
   Decal,
-  Environment,
   useTexture,
-} from "@react-three/drei";
-
-// Add these to your imports at the top
-import woodColor from "../assets/wood_diffuse.jpg";
-import woodNormal from "../assets/wood_normal.jpg";
+} from '@react-three/drei';
 
 // ... [KEEP ALL YOUR IMPORTED ICONS HERE] ...
 // (I am omitting the imports to save space, keep them exactly as you have them)
-import iconHTML from "../assets/html1.png";
-import iconCSS from "../assets/css1.png";
-import iconJAVA from "../assets/java1.png";
-import iconJS from "../assets/js.png";
-import iconTS from "../assets/ts1.png";
-import iconREACT from "../assets/react1.png";
-import iconCSHARP from "../assets/csharp1.png";
-import iconBLAZOR from "../assets/blazor1.png";
-import iconPYTHON from "../assets/python1.png";
-import iconSQL from "../assets/mysql.png";
-import iconNODE from "../assets/nodejs1.png";
-import iconGH from "../assets/github.png";
-import fallbackIcon from "../assets/at_logo.png";
+import iconHTML from '../assets/html1.png';
+import iconCSS from '../assets/css1.png';
+import iconJAVA from '../assets/java1.png';
+import iconJS from '../assets/js.png';
+import iconTS from '../assets/ts1.png';
+import iconREACT from '../assets/react1.png';
+import iconCSHARP from '../assets/csharp1.png';
+import iconBLAZOR from '../assets/blazor1.png';
+import iconPYTHON from '../assets/python1.png';
+import iconSQL from '../assets/mysql.png';
+import iconNODE from '../assets/nodejs1.png';
+import iconGH from '../assets/github.png';
+import fallbackIcon from '../assets/at_logo.png';
 
 const getIcon = (img) => img || fallbackIcon;
 
 const KEYS = [
   // Row 1
   {
-    color: "#fff",
-    label: "html",
+    color: '#fff',
+    label: 'html',
     icon: getIcon(iconHTML),
-    desc: "Structure & Semantics.",
-    details: "I use HTML as the backbone of every web application I build, focusing heavily on semantic structure and accessibility. I ensure that my markup is clean and SEO-friendly, providing a solid foundation for styling and interactivity across all devices."
+    desc: 'Structure & Semantics.',
+    details: 'I use HTML as the backbone of every web application I build, focusing heavily on semantic structure and accessibility. I ensure that my markup is clean and SEO-friendly, providing a solid foundation for styling and interactivity across all devices.',
   },
   {
-    color: "#fff",
-    label: "css",
+    color: '#fff',
+    label: 'css',
     icon: getIcon(iconCSS),
-    desc: "Styling & Layout.",
-    details: "I leverage CSS to transform raw markup into visually engaging interfaces. My workflow typically involves using Flexbox and Grid for responsive layouts, and I am comfortable organizing styles for scalability, whether through raw CSS, modules, or pre-processors."
+    desc: 'Styling & Layout.',
+    details: 'I leverage CSS to transform raw markup into visually engaging interfaces. My workflow typically involves using Flexbox and Grid for responsive layouts, and I am comfortable organizing styles for scalability, whether through raw CSS, modules, or pre-processors.',
   },
   {
-    color: "#F7DF1C",
-    label: "javascript",
+    color: '#F7DF1C',
+    label: 'javascript',
     icon: getIcon(iconJS),
-    desc: "Interactive Logic.",
-    details: "JavaScript is my primary tool for adding interactivity to the browser. I have extensive experience manipulating the DOM, handling asynchronous data requests, and writing clean, modern ES6+ code to create seamless user experiences without relying solely on frameworks."
+    desc: 'Interactive Logic.',
+    details: 'JavaScript is my primary tool for adding interactivity to the browser. I have extensive experience manipulating the DOM, handling asynchronous data requests, and writing clean, modern ES6+ code to create seamless user experiences without relying solely on frameworks.',
   },
   {
-    color: "#397CC7",
-    label: "typescript",
+    color: '#397CC7',
+    label: 'typescript',
     icon: getIcon(iconTS),
-    desc: "Type-safe JavaScript.",
-    details: "I adopt TypeScript in larger codebases to ensure robustness and maintainability. By defining strict types and interfaces, I can catch errors at compile-time rather than runtime, which significantly speeds up my debugging process and makes refactoring complex features much safer."
+    desc: 'Type-safe JavaScript.',
+    details: 'I adopt TypeScript in larger codebases to ensure robustness and maintainability. By defining strict types and interfaces, I can catch errors at compile-time rather than runtime, which significantly speeds up my debugging process and makes refactoring complex features much safer.',
   },
   // Row 2
   {
-    color: "#fff",
-    label: "java",
+    color: '#fff',
+    label: 'java',
     icon: getIcon(iconJAVA),
-    desc: "Backend & Enterprise.",
-    details: "I have utilized Java for building reliable, high-performance backend systems. My experience includes understanding object-oriented principles and working with typical enterprise architectures, allowing me to manage strict data structures and server-side logic efficiently."
+    desc: 'Backend & Enterprise.',
+    details: 'I have utilized Java for building reliable, high-performance backend systems. My experience includes understanding object-oriented principles and working with typical enterprise architectures, allowing me to manage strict data structures and server-side logic efficiently.',
   },
   {
-    color: "#fff",
-    label: "react",
+    color: '#fff',
+    label: 'react',
     icon: getIcon(iconREACT),
-    desc: "UI Library.",
-    details: "React is my go-to library for front-end development. I use it to build single-page applications with reusable components and efficient state management. I am proficient with Hooks and the component lifecycle, ensuring my applications are both performant and easy to scale."
+    desc: 'UI Library.',
+    details: 'React is my go-to library for front-end development. I use it to build single-page applications with reusable components and efficient state management. I am proficient with Hooks and the component lifecycle, ensuring my applications are both performant and easy to scale.',
   },
   {
-    color: "#fff",
-    label: "c#",
+    color: '#fff',
+    label: 'c#',
     icon: getIcon(iconCSHARP),
-    desc: "General Purpose.",
-    details: "I use C# primarily within the .NET ecosystem for robust backend development. I appreciate its strong typing and modern syntax features, which I leverage to build secure, scalable APIs and services that integrate seamlessly with Microsoft-based infrastructures."
+    desc: 'General Purpose.',
+    details: 'I use C# primarily within the .NET ecosystem for robust backend development. I appreciate its strong typing and modern syntax features, which I leverage to build secure, scalable APIs and services that integrate seamlessly with Microsoft-based infrastructures.',
   },
   {
-    color: "#5B2E8E",
-    label: "blazor",
+    color: '#5B2E8E',
+    label: 'blazor',
     icon: getIcon(iconBLAZOR),
-    desc: "C# for the Web.",
-    details: "I have experimented with Blazor to build interactive web UIs using C# instead of JavaScript. It allows me to share logic between client and server, and I enjoy using it for full-stack .NET projects where type consistency across the entire stack is a priority."
+    desc: 'C# for the Web.',
+    details: 'I have experimented with Blazor to build interactive web UIs using C# instead of JavaScript. It allows me to share logic between client and server, and I enjoy using it for full-stack .NET projects where type consistency across the entire stack is a priority.',
   },
   // Row 3
   {
-    color: "#fff",
-    label: "python",
+    color: '#fff',
+    label: 'python',
     icon: getIcon(iconPYTHON),
-    desc: "Data & Scripting.",
-    details: "I utilize Python for data analysis, automation scripts, and occasionally backend development. Its readability makes it excellent for rapid prototyping, and I have used it to process datasets and automate repetitive workflows that would be cumbersome in other languages."
+    desc: 'Data & Scripting.',
+    details: 'I utilize Python for data analysis, automation scripts, and occasionally backend development. Its readability makes it excellent for rapid prototyping, and I have used it to process datasets and automate repetitive workflows that would be cumbersome in other languages.',
   },
   {
-    color: "#fff",
-    label: "sql",
+    color: '#fff',
+    label: 'sql',
     icon: getIcon(iconSQL),
-    desc: "Database Management.",
-    details: "I use SQL to design and manage relational databases, ensuring data integrity and efficient retrieval. I am comfortable writing complex queries to join tables, aggregate data, and optimize performance for data-driven applications."
+    desc: 'Database Management.',
+    details: 'I use SQL to design and manage relational databases, ensuring data integrity and efficient retrieval. I am comfortable writing complex queries to join tables, aggregate data, and optimize performance for data-driven applications.',
   },
   {
-    color: "#80BD00",
-    label: "nodejs",
+    color: '#80BD00',
+    label: 'nodejs',
     icon: getIcon(iconNODE),
-    desc: "JS Runtime.",
-    details: "I use Node.js to bring JavaScript to the server, allowing me to build full-stack applications using a single language. I typically use it to create RESTful APIs and handle real-time data, taking advantage of its non-blocking event loop for high-performance tasks."
+    desc: 'JS Runtime.',
+    details: 'I use Node.js to bring JavaScript to the server, allowing me to build full-stack applications using a single language. I typically use it to create RESTful APIs and handle real-time data, taking advantage of its non-blocking event loop for high-performance tasks.',
   },
   {
-    color: "#fff",
-    label: "github",
+    color: '#fff',
+    label: 'github',
     icon: getIcon(iconGH),
-    desc: "Version Control.",
-    details: "GitHub is central to my development workflow. I use it not just for storing code, but for version control, collaboration via pull requests, and tracking issues. It ensures my projects are documented, safe, and easily accessible for team collaboration."
+    desc: 'Version Control.',
+    details: 'GitHub is central to my development workflow. I use it not just for storing code, but for version control, collaboration via pull requests, and tracking issues. It ensures my projects are documented, safe, and easily accessible for team collaboration.',
   },
 ];
 
@@ -249,7 +243,7 @@ function Keycap({
       group.current.position.y = THREE.MathUtils.lerp(
         group.current.position.y,
         targetY,
-        delta * 20
+        delta * 20,
       );
     }
   });
@@ -269,15 +263,15 @@ function Keycap({
       onPointerEnter={(e) => {
         e.stopPropagation();
         setHovered(true);
-        document.body.style.cursor = "pointer";
+        document.body.style.cursor = 'pointer';
         if (setHoveredTech) {
           // We pass color: "#000" so the text is visible (since keys are white)
           setHoveredTech({ label, desc, color, details });
         }
       }}
-      onPointerLeave={(e) => {
+      onPointerLeave={() => {
         setHovered(false);
-        document.body.style.cursor = "default";
+        document.body.style.cursor = 'default';
         // CLEAR DATA
         if (setHoveredTech) setHoveredTech(null);
       }}
@@ -327,7 +321,7 @@ function Scene({ setHoveredTech }) {
   const spacing = 1.05;
   const positions = useMemo(
     () => gridPositions(KEYS.length, cols, spacing),
-    []
+    [],
   );
   const keyHeight = 0.65;
   const bodyGeo = useTaperedKeycapGeometry({ height: keyHeight });
@@ -372,11 +366,11 @@ export default function TechKeycaps3D({ setHoveredTech }) {
     // FIX: Changed 100vw/vh to 100% so it fits in the parent container
     <div
       style={{
-        width: "50%",
-        height: "100%",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
+        width: '50%',
+        height: '100%',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
       }}
     >
       <Canvas

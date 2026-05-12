@@ -1,0 +1,37 @@
+// ─── Layout ──────────────────────────────────────────────────────────────────
+
+.aboutbio-section {
+  width: 100%;
+  padding: clamp(60px, 8vw, 120px) clamp(16px, 7.5vw, 100px);
+}
+
+.aboutbio-content-container h2 {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 300;
+  padding-bottom: clamp(32px, 4vw, 60px);
+  letter-spacing: -3%;
+}
+
+// ─── Bio text ────────────────────────────────────────────────────────────────
+
+.content-text-container {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: 1fr 1fr;
+}
+
+.aboutbio-section p {
+  font-family: 'IBM Plex Serif', serif;
+  font-size: clamp(15px, 1.4vw, 17px);
+  line-height: 1.7;
+}
+
+// ─── Responsive ───────────────────────────────────────────────────────────────
+
+@media (max-width: 768px) {
+  .content-text-container {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+}

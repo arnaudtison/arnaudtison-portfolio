@@ -1,0 +1,208 @@
+// ─── Section ──────────────────────────────────────────────────────────────────
+
+.experience-section {
+  width: 100%;
+  padding: clamp(60px, 8vw, 120px) clamp(16px, 7.5vw, 100px);
+}
+
+.experience-content > h2 {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 300;
+  margin-bottom: clamp(32px, 4vw, 60px);
+}
+
+// ─── Timeline ─────────────────────────────────────────────────────────────────
+
+.timeline {
+  position: relative;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.timeline__line {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: #111;
+  transform: translateX(-50%);
+}
+
+// ─── Item ─────────────────────────────────────────────────────────────────────
+
+.exp-item {
+  position: relative;
+  width: 46%;
+  margin-bottom: 60px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+  opacity: 0;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+
+  &--left {
+    left: 0;
+    transform: translateX(-24px);
+
+    .exp-item__dot {
+      right: calc(-8.7% - 5px);
+      left: auto;
+    }
+  }
+
+  &--right {
+    left: 54%;
+    transform: translateX(24px);
+
+    .exp-item__dot {
+      left: calc(-8.7% - 5px);
+      right: auto;
+    }
+  }
+
+  &--visible {
+    opacity: 1;
+    transform: translateX(0) !important;
+  }
+}
+
+// dot on the line
+.exp-item__dot {
+  position: absolute;
+  top: 18px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #111;
+  z-index: 1;
+}
+
+// ─── Card ─────────────────────────────────────────────────────────────────────
+
+.exp-item__card {
+  padding: 20px 22px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background: #fff;
+  transition: box-shadow 0.2s ease;
+
+  &:hover {
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
+  }
+}
+
+.exp-item__meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.exp-item__year {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.exp-item__label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: #888;
+  background: #f2f2f2;
+  padding: 2px 8px;
+  border-radius: 20px;
+}
+
+.exp-item__title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: clamp(14px, 1.2vw, 17px);
+  font-weight: 600;
+  margin: 0 0 4px 0;
+}
+
+.exp-item__org {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: #555;
+  margin: 0 0 10px 0;
+}
+
+.exp-item__location {
+  color: #aaa;
+}
+
+.exp-item__desc {
+  font-family: 'IBM Plex Serif', serif;
+  font-size: 13px;
+  line-height: 1.65;
+  color: #444;
+  margin: 0 0 12px 0;
+}
+
+.exp-item__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-bottom: 10px;
+}
+
+.exp-item__tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  background: #f0f0f0;
+  border-radius: 20px;
+  padding: 2px 8px;
+  color: #333;
+  letter-spacing: 0.02em;
+}
+
+.exp-item__github {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: #111;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  transition: opacity 0.15s;
+
+  &:hover { opacity: 0.5; }
+}
+
+// ─── Responsive ───────────────────────────────────────────────────────────────
+
+@media (max-width: 768px) {
+  .timeline__line {
+    left: 16px;
+  }
+
+  .exp-item {
+    width: calc(100% - 44px);
+
+    &--left,
+    &--right {
+      left: 44px;
+
+      .exp-item__dot {
+        left: -33px;
+        right: auto;
+      }
+    }
+
+    &--left {
+      transform: translateX(24px);
+    }
+
+    &--right {
+      transform: translateX(24px);
+    }
+
+    &--visible {
+      transform: translateX(0) !important;
+    }
+  }
+}
+

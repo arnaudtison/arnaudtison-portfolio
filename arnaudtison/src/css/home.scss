@@ -1,39 +1,54 @@
+// Lock scroll when mobile menu is open
+html.menu-open {
+  overflow: hidden;
+}
+
 // scrollbar styling
 
-/* 1. The Scrollbar container */
+/* Firefox only (browsers without WebKit scrollbar support) */
+@supports not selector(::-webkit-scrollbar) {
+    html {
+        scrollbar-width: thin;
+        scrollbar-color: #000000 transparent;
+    }
+}
+
+/* Chromium-based browsers */
 ::-webkit-scrollbar {
-    width: 10px;              /* Width of vertical scrollbar */
-    height: 10px;             /* Height of horizontal scrollbar */
+    width: 10px;
+    height: 10px;
 }
 
-/* 2. The Track (background) */
 ::-webkit-scrollbar-track {
-    background: #ffffff;      /* Color of the track */
-    border-radius: 4px;       /* Optional: rounded edges */
+    background: transparent;
 }
 
-/* 3. The Handle (thumb) */
 ::-webkit-scrollbar-thumb {
-    background: #000000;         /* Color of the handle */
+    background: #000000;
 }
 
-/* 4. Handle on Hover */
 ::-webkit-scrollbar-thumb:hover {
-    background: #2a2a2a;         /* Darker color when hovering */
+    background: #2a2a2a;
 }
 
-/* 5. The Corner (if both scrollbars are visible) */
 ::-webkit-scrollbar-corner {
     background: transparent;
 }
 
 //
 
-html, body {
-  cursor: none !important
+*, *::before, *::after {
+  cursor: none !important;
 }
 .custom-cursor {
-  z-index: 110;
+  z-index: 999999 !important;
+}
+
+// Restore cursor on touch/mobile devices (must be after cursor: none above)
+@media (pointer: coarse) {
+  *, *::before, *::after {
+    cursor: auto !important;
+  }
 }
 
 
@@ -77,19 +92,50 @@ html, body {
 .navigation-wrapper .redirect-links-container {
   display: flex;
   flex-direction: row;
-  gap: 100px;
-  font-size: 28px;
-  font-weight: 400;
+  gap: clamp(32px, 4vw, 72px);
+  font-size: clamp(16px, 1.5vw, 22px);
+  font-weight: 300;
 }
 
 .redirect-links-container .redirect-link {
   user-select: none;
+  white-space: nowrap;
 }
 
 .redirect-links-container .external-links-container {
   display: flex;
   flex-direction: row;
   gap: 25px;
+}
+
+@keyframes nav-arrow-up {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes nav-arrow-down {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(8px); }
+}
+
+@keyframes nav-arrow-upright {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(6px, -6px); }
+}
+
+.nav-arrow-anim--up {
+  display: block;
+  animation: nav-arrow-up 1s ease-in-out infinite;
+}
+
+.nav-arrow-anim--down {
+  display: block;
+  animation: nav-arrow-down 1s ease-in-out infinite;
+}
+
+.nav-arrow-anim--upright {
+  display: block;
+  animation: nav-arrow-upright 1s ease-in-out infinite;
 }
 
 .landing-wrapper {
@@ -105,6 +151,8 @@ html, body {
 .horizontal-slider {
   overflow: hidden;
   width: 100%;
+  padding-bottom: 0.06em;
+  flex-shrink: 0;
 }
 
 .horizontal-slider .marquee {
@@ -126,8 +174,8 @@ html, body {
   white-space: nowrap;
 
   font-family: "Anton";
-  font-size: 170px;
-  -webkit-text-stroke: 3px black;
+  font-size: clamp(58px, 14vw, 170px);
+  -webkit-text-stroke: 2px black;
   color: transparent;
 }
 
@@ -151,20 +199,21 @@ html, body {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 0 150px 0 100px;
+  padding: 0 clamp(24px, 10vw, 150px) 0 clamp(24px, 8vw, 100px);
 }
 
 .content-grid .syntax-block {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  width: 600px;
+  width: clamp(300px, 40vw, 600px);
+  flex-shrink: 0;
 }
 
 .syntax-block .syntax-block-input {
   position: relative;
   font-family: "Jetbrains Mono";
-  font-size: 20px;
+  font-size: clamp(12px, 1.6vw, 20px);
   color: #fff;
   background: #373737;
   padding: 20px;
@@ -194,7 +243,7 @@ html, body {
 
 .syntax-block .syntax-block-output {
   font-family: "Jetbrains Mono";
-  font-size: 18px;
+  font-size: clamp(11px, 1.4vw, 18px);
   color: #fff;
   background: #373737;
   padding: 15px 20px;
@@ -225,7 +274,14 @@ html, body {
 }
 
 .content-grid .image-container img {
-  margin-top: -140px;
+  max-width: clamp(220px, 28vw, 480px);
+  margin-top: clamp(-80px, -10vw, -140px);
+}
+
+// ─── Mobile hero (hidden on desktop, shown on mobile) ─────────────────────────
+
+.mobile-hero {
+  display: none;
 }
 
 /* LANGUAGE SLIDER */
@@ -285,4 +341,275 @@ html, body {
   to {
     transform: translate3d(0, 0, 0);
   }
+}
+
+// ─── Hamburger button ────────────────────────────────────────────────────────
+
+.nav-hamburger {
+  display: none;
+  background: none;
+  border: none;
+  padding: 4px;
+  cursor: pointer !important;
+  z-index: 101;
+  position: relative;
+  line-height: 0;
+}
+
+.hamburger-line {
+  fill: #000;
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s ease;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.nav-hamburger--open .hamburger-line--1 {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.nav-hamburger--open .hamburger-line--2 {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.nav-hamburger--open .hamburger-line--3 {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+// ─── Mobile overlay menu ─────────────────────────────────────────────────────
+
+.nav-mobile-menu {
+  position: fixed;
+  inset: 0;
+  z-index: 99;
+  background: rgba(225, 225, 225, 0.97);
+  backdrop-filter: blur(20px);
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.15'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 52px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.nav-mobile-menu--open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.nav-mobile-links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 36px;
+}
+
+.nav-mobile-link {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 28px;
+  font-weight: 300;
+  letter-spacing: 0.02em;
+  cursor: pointer !important;
+  user-select: none;
+  transition: opacity 0.15s ease;
+
+  &:hover {
+    opacity: 0.5;
+  }
+}
+
+.nav-mobile-external {
+  display: flex;
+  gap: 28px;
+  align-items: center;
+
+  svg, button {
+    cursor: pointer !important;
+  }
+}
+
+// ─── Large screens (≥1600px) ─────────────────────────────────────────────────
+
+@media (min-width: 1600px) {
+  .navigation-wrapper {
+    padding: 40px 140px 30px 140px;
+  }
+
+  .landing-wrapper .content-grid {
+    padding: 0 200px 0 140px;
+  }
+}
+
+// ─── Tablet (≤1400px): hamburger nav + compact landing ───────────────────────
+
+@media (max-width: 1400px) {
+  .navigation-wrapper {
+    padding: 20px 40px;
+  }
+
+  .navigation-wrapper .logo-container img {
+    height: 60px;
+  }
+
+  .navigation-wrapper .redirect-links-container {
+    display: none;
+  }
+
+  .nav-hamburger {
+    display: block;
+  }
+
+  .landing-wrapper {
+    padding-top: 110px;
+  }
+
+}
+
+// ─── Mobile (≤768px) ─────────────────────────────────────────────────────────
+
+@media (max-width: 768px) {
+  .navigation-wrapper {
+    padding: 16px 24px;
+  }
+
+  .navigation-wrapper .logo-container img {
+    height: 52px;
+  }
+
+  .landing-wrapper {
+    padding-top: 90px;
+  }
+
+  // Hide desktop code+photo grid, show mobile hero instead
+  .landing-wrapper .content-grid {
+    display: none;
+  }
+
+  .mobile-hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 16px 10px 0;
+    gap: 20px;
+  }
+
+  .mobile-hero-role {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 300;
+    color: #888;
+    letter-spacing: 0.06em;
+    align-self: flex-start;
+    padding-left: 4px;
+  }
+
+  .mobile-hero-img {
+    width: calc(100% - 48px);
+    max-width: 380px;
+    display: block;
+  }
+
+  .mobile-hero-info {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid #000;
+    padding: 0 14px;
+  }
+
+  .mobile-hero-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+    padding: 11px 0;
+    border-bottom: 1px solid #000;
+  }
+
+  .mobile-hero-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    color: #888;
+    flex-shrink: 0;
+  }
+
+  .mobile-hero-value {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: #000;
+    text-align: right;
+  }
+
+  .horizontal-language-slider {
+    padding: 40px 0 24px;
+  }
+
+  .horizontal-language-slider .marquee__content {
+    font-size: 16px;
+  }
+
+  .horizontal-language-slider .marquee__content span {
+    margin-right: 60px;
+  }
+
+  .horizontal-language-slider .marquee__content span::after {
+    right: -40px;
+  }
+
+  .nav-mobile-link {
+    font-size: 22px;
+  }
+
+  .nav-mobile-links {
+    gap: 28px;
+  }
+}
+
+// ─── Small mobile (≤480px) ───────────────────────────────────────────────────
+
+@media (max-width: 480px) {
+  .navigation-wrapper {
+    padding: 14px 20px;
+  }
+
+  .navigation-wrapper .logo-container img {
+    height: 46px;
+  }
+
+  .mobile-hero-img {
+    max-width: 320px;
+  }
+
+  .mobile-hero-label {
+    font-size: 9px;
+  }
+
+  .mobile-hero-value {
+    font-size: 12px;
+  }
+
+  .nav-mobile-link {
+    font-size: 20px;
+  }
+
+  .nav-mobile-links {
+    gap: 24px;
+  }
+}
+
+// ─── Footer ───────────────────────────────────────────────────────────────────
+
+.site-footer {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 300;
+  color: #999;
+  text-align: center;
+  padding: 24px 16px 70px;
+  border-top: 1px solid #e8e8e8;
 }

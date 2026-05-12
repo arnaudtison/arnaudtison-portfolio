@@ -1,44 +1,44 @@
-import { useState, useEffect } from "react";
-import imageSelf from "../assets/imageSelf.png";
-import About from "./About.jsx";
-import Work from "./Work.jsx";
-import Contact from "./Contact.jsx";
-import ProgressiveBlurBar from "../components/ProgressiveBlurBar.jsx";
-import "../css/home.scss";
+import { useState, useEffect } from 'react';
+import imageSelf from '../assets/imageSelf.png';
+import AboutBio from './AboutBio.jsx';
+import Technologies from './Technologies.jsx';
+import Work from './Work.jsx';
+import Experience from './Experience.jsx';
+import Contact from './Contact.jsx';
+import ProgressiveBlurBar from '../components/ProgressiveBlurBar.jsx';
+import '../css/home.scss';
 
-import CustomCursor from "custom-cursor-react";
-import OutlineFollower from "../components/OutlineFollower.jsx";
-import "custom-cursor-react/dist/index.css";
+import CustomCursor from 'custom-cursor-react';
+import OutlineFollower from '../components/OutlineFollower.jsx';
+import 'custom-cursor-react/dist/index.css';
 
 function Home({ cursorEnabled }) {
-  const roles = ["Full-Stack Developer", "Designer", "Student"];
   const [currentRole, setCurrentRole] = useState(0);
-  const [displayText, setDisplayText] = useState("");
+  const [displayText, setDisplayText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
   const [cursorEnabledPage, setCursorEnabledPage] = useState(false);
 
   const languages = [
-    "HTML",
-    "CSS",
-    "JAVA",
-    "JAVASCRIPT",
-    "TYPESCRIPT",
-    "REACT",
-    "C#",
-    "BLAZOR",
-    "PYTHON",
-    "SQL",
+    'HTML',
+    'CSS',
+    'JAVA',
+    'JAVASCRIPT',
+    'TYPESCRIPT',
+    'REACT',
+    'C#',
+    'BLAZOR',
+    'PYTHON',
+    'SQL',
   ];
 
   useEffect(() => {
+    const roles = ['Full-Stack Developer', 'Designer', 'Student'];
     const role = roles[currentRole];
     const delay = isDeleting ? 50 : 100;
-    const target = isDeleting ? "" : role;
-
     const timeout = setTimeout(() => {
       if (!isDeleting && displayText === role) {
         setTimeout(() => setIsDeleting(true), 2000);
-      } else if (isDeleting && displayText === "") {
+      } else if (isDeleting && displayText === '') {
         setCurrentRole((prev) => (prev + 1) % roles.length);
         setIsDeleting(false);
       } else {
@@ -51,7 +51,7 @@ function Home({ cursorEnabled }) {
     }, delay);
 
     return () => clearTimeout(timeout);
-  }, [displayText, isDeleting, currentRole, roles]);
+  }, [displayText, isDeleting, currentRole]);
 
   return (
     <div
@@ -90,31 +90,33 @@ function Home({ cursorEnabled }) {
             </div>
           </div>
         </div>
+
+        {/* Desktop: code snippet + photo */}
         <div className="content-grid">
           <div className="syntax-block left">
             <div className="syntax-block-input">
               <span>java</span>
               <div className="syntax-wrapper">
-                <p>String[] roles = {"{"}</p>
+                <p>String[] roles = {'{'}</p>
                 <p>
-                  "<b>Full-Stack Developer</b>",
+                  {'"'}<b>Full-Stack Developer</b>{'"'},
                 </p>
                 <p>
-                  "<b>Designer</b>",
+                  {'"'}<b>Designer</b>{'"'},
                 </p>
                 <p>
-                  "<b>Student</b>"
+                  {'"'}<b>Student</b>{'"'}
                 </p>
-                <p>{"}"};</p>
+                <p>{'}'};</p>
                 <br />
-                <p>for (String role : roles) {"{"}</p>
-                <p>System.out.println("I am a " + role);</p>
-                <p>{"}"}</p>
+                <p>for (String role : roles) {'{'}</p>
+                <p>System.out.println({'"'}I am a {'"'} + role);</p>
+                <p>{'}'}</p>
               </div>
             </div>
             <div className="syntax-block-output">
               <p>
-                {">"} portfolio.java: I am a{" "}
+                {'>'} portfolio.java: I am a{' '}
                 <span className="typing-text">{displayText}</span>
                 <span className="cursor">|</span>
               </p>
@@ -122,6 +124,30 @@ function Home({ cursorEnabled }) {
           </div>
           <div className="image-container right">
             <img src={imageSelf} alt="Arnaud Tison" />
+          </div>
+        </div>
+
+        {/* Mobile: photo + profile info card */}
+        <div className="mobile-hero">
+          <p className="mobile-hero-role">Full-Stack Developer</p>
+          <img src={imageSelf} alt="Arnaud Tison" className="mobile-hero-img" />
+          <div className="mobile-hero-info">
+            <div className="mobile-hero-row">
+              <span className="mobile-hero-label">LOCATION</span>
+              <span className="mobile-hero-value">Brakel, Belgium</span>
+            </div>
+            <div className="mobile-hero-row">
+              <span className="mobile-hero-label">LANGUAGES</span>
+              <span className="mobile-hero-value">NL · EN · FR</span>
+            </div>
+            <div className="mobile-hero-row">
+              <span className="mobile-hero-label">CURRENT</span>
+              <span className="mobile-hero-value">Turtle Srl internship</span>
+            </div>
+            <div className="mobile-hero-row">
+              <span className="mobile-hero-label">NEXT</span>
+              <span className="mobile-hero-value">TBD</span>
+            </div>
           </div>
         </div>
         <div className="horizontal-language-slider">
@@ -150,9 +176,13 @@ function Home({ cursorEnabled }) {
       </div>
       {/* <ScrollIndicator /> */}
 
-      <About />
+      <AboutBio />
+      <Technologies />
       <Work />
+      <Experience />
       <Contact />
+
+      <footer className="site-footer">© 2026 Arnaud Tison</footer>
 
       <ProgressiveBlurBar />
     </div>

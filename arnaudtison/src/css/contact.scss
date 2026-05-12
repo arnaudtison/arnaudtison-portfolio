@@ -1,6 +1,5 @@
 .contact-section {
-//   height: 0;
-  padding: 0 100px 100px 100px;
+  padding: clamp(60px, 8vw, 120px) clamp(16px, 7.5vw, 100px);
   position: relative;
   display: flex;
   flex-direction: column;
@@ -13,9 +12,9 @@
 
 .contact-content h2 {
   font-family: "Jetbrains Mono", monospace;
-  font-size: 44px;
-  font-weight: 400;
-  padding: 40px 0 60px 0;
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 300;
+  padding-bottom: clamp(32px, 4vw, 60px);
 }
 
 .contact-content .contact-fields {
@@ -36,14 +35,14 @@
 }
 .contact-fields-col .field span {
     font-family: 'IBM Plex Serif';
-    font-size: 25px;
+    font-size: clamp(16px, 2vw, 25px);
     font-weight: 0;
 }
 .contact-fields-col .field input, 
 .contact-fields-col .field textarea {
     border: 2px solid black;
     height: 60px;
-    font-size: 22px;
+    font-size: clamp(15px, 1.8vw, 22px);
     padding: 12px;
     width: 100%;
     box-sizing: border-box;
@@ -87,3 +86,53 @@
     background-color: white;
     color: black;
 }
+
+// ─── Responsive ───────────────────────────────────────────────────────────────
+
+@media (max-width: 768px) {
+  .contact-content h2 {
+    padding-bottom: 18px;
+  }
+
+  .contact-content .contact-fields {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .contact-fields-col:first-of-type .field,
+  .contact-fields-col:last-of-type .field:first-of-type,
+  .contact-fields-col:last-of-type .field:last-of-type {
+    height: auto;
+  }
+
+  .contact-fields .contact-fields-col .field {
+    height: auto !important;
+    gap: 6px;
+    margin-bottom: 10px;
+  }
+
+  .contact-fields-col .field span {
+    font-size: 14px;
+  }
+
+  .contact-fields-col .field input,
+  .contact-fields-col .field textarea {
+    font-size: 15px;
+    height: 44px;
+  }
+
+  .contact-fields-col:last-of-type .field:last-of-type textarea {
+    height: 100px !important;
+    resize: none;
+  }
+
+  .contact-content .contact-fields-submit {
+    padding: 12px 0 0 0;
+  }
+
+  .contact-fields-submit button {
+    font-size: 16px;
+    padding: 12px 40px;
+  }
+}
+

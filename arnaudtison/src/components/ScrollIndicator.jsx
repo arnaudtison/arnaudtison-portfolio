@@ -1,4 +1,4 @@
-import { ArrowDown } from "lucide-react";
+import { ArrowDown } from 'lucide-react';
 
 export default function ScrollIndicator() {
   return (
@@ -27,19 +27,19 @@ export default function ScrollIndicator() {
 
 const styles = {
   scrollIndicator: {
-    position: "relative",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
+    position: 'relative',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   ring: {
-    width: "200px",
-    height: "200px",
+    width: '200px',
+    height: '200px',
   },
   arrowCenter: {
-    position: "absolute",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
+    position: 'absolute',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 };

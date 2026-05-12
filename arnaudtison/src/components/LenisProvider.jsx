@@ -1,5 +1,5 @@
-import { useEffect } from "react";
-import { lenis } from "../lib/lenis";
+import { useEffect } from 'react';
+import { lenis } from '../lib/lenis';
 
 export default function LenisProvider({ children }) {
   useEffect(() => {
