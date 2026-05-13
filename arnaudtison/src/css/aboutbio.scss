@@ -17,14 +17,23 @@
 
 .content-text-container {
   display: grid;
-  gap: 20px;
+  gap: clamp(24px, 5vw, 60px);
   grid-template-columns: 1fr 1fr;
+  align-items: start;
+}
+
+.content-col {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .aboutbio-section p {
   font-family: 'IBM Plex Serif', serif;
   font-size: clamp(15px, 1.4vw, 17px);
   line-height: 1.7;
+  margin: 0;
+  text-align: justify;
 }
 
 // ─── Responsive ───────────────────────────────────────────────────────────────
@@ -32,6 +41,10 @@
 @media (max-width: 768px) {
   .content-text-container {
     grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .content-col {
     gap: 18px;
   }
 }

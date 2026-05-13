@@ -118,7 +118,7 @@ export default function Navbar({ setCursorEnabled, navigateToSection }) {
   };
 
   const navLinks = [
-    { key: 'about', label: 'WHO AM I?' },
+    { key: 'about', label: 'ABOUT' },
     { key: 'technologies', label: 'TECHNOLOGIES' },
     { key: 'work', label: 'PROJECTS' },
     { key: 'experience', label: 'EXPERIENCE' },
