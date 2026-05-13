@@ -25,7 +25,9 @@ export default function WorkModal({ project, onClose }) {
   return (
     <div className="modal-backdrop" onClick={onClose}>
       <div className="modal-card" onClick={(e) => e.stopPropagation()}>
-        <button className="modal-close" onClick={onClose} aria-label="Close">✕</button>
+        <div className="modal-close-bar">
+          <button className="modal-close" onClick={onClose} aria-label="Close">✕</button>
+        </div>
 
         <div className="modal-info">
           <div className="modal-header">

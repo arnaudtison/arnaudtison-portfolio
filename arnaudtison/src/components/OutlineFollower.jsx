@@ -10,6 +10,7 @@ export default function OutlineFollower({ size = 0, speed = 0 }) {
   const raf = useRef(0);
   const started = useRef(false);
   const isActive = useRef(false);
+  const lastTouch = useRef(0);
 
   useEffect(() => {
     const onMove = (e) => {
@@ -50,6 +51,9 @@ export default function OutlineFollower({ size = 0, speed = 0 }) {
     };
 
     const start = (e) => {
+      // Browsers fire synthetic mousemove after touch — ignore them.
+      if (Date.now() - lastTouch.current < 500) return;
+
       mouse.current.x = e.clientX;
       mouse.current.y = e.clientY;
       pos.current.x = e.clientX;
@@ -64,12 +68,26 @@ export default function OutlineFollower({ size = 0, speed = 0 }) {
       }
     };
 
+    // Hide the cursor on touch and re-arm the first-mousemove trigger so it
+    // reappears cleanly if the user switches back to a trackpad/mouse.
+    const onTouchStart = () => {
+      lastTouch.current = Date.now();
+      if (ringRef.current) ringRef.current.style.opacity = '0';
+      if (invertRef.current) invertRef.current.style.opacity = '0';
+      started.current = false;
+      cancelAnimationFrame(raf.current);
+      window.removeEventListener('mousemove', onMove);
+      window.addEventListener('mousemove', start, { passive: true, once: true });
+    };
+
     window.addEventListener('mousemove', start, { passive: true, once: true });
+    window.addEventListener('touchstart', onTouchStart, { passive: true });
     document.addEventListener('pointerover', onPointerOver);
 
     return () => {
       window.removeEventListener('mousemove', start);
       window.removeEventListener('mousemove', onMove);
+      window.removeEventListener('touchstart', onTouchStart);
       document.removeEventListener('pointerover', onPointerOver);
       cancelAnimationFrame(raf.current);
     };

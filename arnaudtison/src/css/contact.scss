@@ -64,6 +64,64 @@
 .contact-fields-col:last-of-type .field:first-of-type { height: calc(100%/3)}
 .contact-fields-col:last-of-type .field:last-of-type { height: calc(100% * (2/3))}
 
+.contact-fields-col .field .field-input-wrap {
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-fields-col:last-of-type .field:last-of-type .field-input-wrap {
+  height: 100%;
+}
+
+.contact-fields-col .field .field-error {
+  font-family: 'IBM Plex Serif';
+  font-size: clamp(12px, 1vw, 14px);
+  color: #c0392b;
+  margin: 6px 0 0 0;
+  padding: 0;
+}
+
+.contact-content .contact-success {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: clamp(24px, 3vw, 40px);
+
+  .contact-success-msg {
+    font-family: 'IBM Plex Serif';
+    font-size: clamp(20px, 2.5vw, 32px);
+    font-weight: 300;
+    line-height: 1.5;
+  }
+
+  .contact-another-btn {
+    align-self: flex-start;
+    background-color: transparent;
+    border: 2px solid black;
+    color: black;
+    font-family: 'IBM Plex Serif';
+    font-size: clamp(14px, 1.4vw, 20px);
+    padding: 14px 40px;
+    cursor: pointer;
+    transition:
+      background-color 0.2s ease-in-out,
+      color 0.2s ease-in-out;
+
+    &:hover {
+      background-color: black;
+      color: white;
+    }
+  }
+}
+
+.contact-fields-submit .contact-send-error {
+  font-family: 'IBM Plex Serif';
+  font-size: clamp(13px, 1.2vw, 16px);
+  color: #c0392b;
+  margin-top: 10px;
+}
+
 .contact-content .contact-fields-submit {
     display: flex;
     justify-content: flex-end;

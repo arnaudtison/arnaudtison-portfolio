@@ -5,9 +5,10 @@ import '../css/contact.scss';
 export default function Contact() {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const form = useRef();
-  const [errors, setErrors] = useState([]);
-  const [status, setStatus] = useState(''); // Fixed: changed useStatus to useState
+  const [errors, setErrors] = useState({});
+  const [status, setStatus] = useState('');
   const [isSending, setIsSending] = useState(false);
+  const [sent, setSent] = useState(false);
 
   const checkFields = () => {
     const first = document.querySelector('#firstname');
@@ -15,114 +16,129 @@ export default function Contact() {
     const mail = document.querySelector('#email');
     const subject = document.querySelector('#subject');
     const message = document.querySelector('#message');
-    
-    let errorMsg = [];
 
-    if (first.value.trim() === '') {
-      errorMsg.push('First Name is required.');
-    }
+    const errs = {};
 
-    if (last.value.trim() === '') {
-      errorMsg.push('Last Name is required.');
-    }
+    if (first.value.trim() === '') errs.firstname = 'First name is required.';
+    if (last.value.trim() === '') errs.lastname = 'Last name is required.';
 
     if (mail.value.trim() === '') {
-      errorMsg.push('E-mail is required.');
+      errs.email = 'E-mail is required.';
     } else if (!emailRegex.test(mail.value.trim())) {
-      errorMsg.push('Please enter a valid e-mail.');
+      errs.email = 'Please enter a valid e-mail.';
     }
 
-    if (subject.value.trim() === '') {
-      errorMsg.push('Subject is required.');
-    }
+    if (subject.value.trim() === '') errs.subject = 'Subject is required.';
+    if (message.value.trim() === '') errs.message = 'Message is required.';
 
-    if (message.value.trim() === '') {
-      errorMsg.push('Message is required.');
-    }
-
-    setErrors(errorMsg);
-    return errorMsg.length === 0;
+    setErrors(errs);
+    return Object.keys(errs).length === 0;
   };
 
   const sendEmail = (e) => {
     e.preventDefault();
- 
-    // check fields
+
     if (checkFields()) {
       setIsSending(true);
-      setStatus('Sending...');
 
       emailjs
         .sendForm(
-          'service_cl3k46p',
-          'template_hk38ueo',
+          'service_cdivafb',
+          'template_ffyo9il',
           form.current,
           {
-            publicKey: 'WV9ko1_6JU4YBgLAp',
+            publicKey: '1_jn_WDFzg5gASEM2',
           },
         )
         .then(
           () => {
-            setStatus('Message sent!');
-            form.current.reset(); 
-            setErrors([]);
+            form.current.reset();
+            setErrors({});
             setIsSending(false);
+            setSent(true);
           },
           () => {
             setStatus('Failed to send. Please try again.');
             setIsSending(false);
           },
         );
-    };
+    }
+  };
+
+  const handleSendAnother = () => {
+    setSent(false);
+    setStatus('');
   };
 
   return (
     <div id="contact" className="contact-section">
       <div className="contact-content">
         <h2>GET IN TOUCH</h2>
-        {errors.map((error, index) => (
-          <span key={index}>{error}</span>
-        ))}
-                
-        {/* 1. Changed div to form, added ref and onSubmit (for 'Enter' key support) */}
-        <form className="contact-fields" ref={form} onSubmit={sendEmail}>
-          <div className="contact-fields-col">
-            <div className="field first">
-              <span>First Name</span>
-              <input id="firstname" type="text" name="firstname" required />
-            </div>
-            <div className="field last">
-              <span>Last Name</span>
-              <input id="lastname" type="text" name="lastname" required />
-            </div>
-            <div className="field mail">
-              <span>E-mail</span>
-              <input id="email" type="email" name="email" required />
-            </div>
-          </div>
-          <div className="contact-fields-col">
-            <div className="field subject">
-              <span>Subject</span>
-              <input id="subject" type="text" name="subject" required />
-            </div>
-            <div className="field msg">
-              <span>Message</span>
-              <textarea id="message" name="message" required />
-            </div>
-          </div>
-        </form>
 
-        <div className="contact-fields-submit">
-          <button 
-            id="submit-btn" 
-            onClick={sendEmail} 
-            disabled={isSending}
-            style={{ opacity: isSending ? 0.5 : 1}}
-          >
-            {isSending ? 'Sending...' : 'Send'}
-          </button>                    
-          {status && <p style={{marginTop: '10px'}}>{status}</p>}
-        </div>
+        {sent ? (
+          <div className="contact-success">
+            <p className="contact-success-msg">Thank you for your message!<br />I&apos;ll be in touch.</p>
+            <button className="contact-another-btn" onClick={handleSendAnother}>
+              Send another message
+            </button>
+          </div>
+        ) : (
+          <>
+            <form className="contact-fields" ref={form} onSubmit={sendEmail}>
+              <div className="contact-fields-col">
+                <div className="field first">
+                  <span>First Name</span>
+                  <div className="field-input-wrap">
+                    <input id="firstname" type="text" name="firstname" required />
+                    {errors.firstname && <p className="field-error">{errors.firstname}</p>}
+                  </div>
+                </div>
+                <div className="field last">
+                  <span>Last Name</span>
+                  <div className="field-input-wrap">
+                    <input id="lastname" type="text" name="lastname" required />
+                    {errors.lastname && <p className="field-error">{errors.lastname}</p>}
+                  </div>
+                </div>
+                <div className="field mail">
+                  <span>E-mail</span>
+                  <div className="field-input-wrap">
+                    <input id="email" type="email" name="email" required />
+                    {errors.email && <p className="field-error">{errors.email}</p>}
+                  </div>
+                </div>
+              </div>
+              <div className="contact-fields-col">
+                <div className="field subject">
+                  <span>Subject</span>
+                  <div className="field-input-wrap">
+                    <input id="subject" type="text" name="subject" required />
+                    {errors.subject && <p className="field-error">{errors.subject}</p>}
+                  </div>
+                </div>
+                <div className="field msg">
+                  <span>Message</span>
+                  <div className="field-input-wrap">
+                    <textarea id="message" name="message" required />
+                    {errors.message && <p className="field-error">{errors.message}</p>}
+                  </div>
+                </div>
+              </div>
+            </form>
+
+            <div className="contact-fields-submit">
+              <button
+                id="submit-btn"
+                onClick={sendEmail}
+                disabled={isSending}
+                style={{ opacity: isSending ? 0.5 : 1 }}
+              >
+                {isSending ? 'Sending...' : 'Send'}
+              </button>
+              {status && <p className="contact-send-error">{status}</p>}
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
